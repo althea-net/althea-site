@@ -1,0 +1,14 @@
+.hero {
+  display: none; // stupid mobile-first
+  text-align: center;
+  padding-bottom: 40px;
+  .title {
+    font-size: 72px;
+    font-family: $heading-font-family;
+    display: inline-block;
+    img {
+      vertical-align: text-top;
+      width: 110px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+a {
+  color: $link-color;
+  background-image: linear-gradient(to top,
+    rgba(0,0,0,0) 13%,
+    rgba($link-color,.8) 13%,
+    rgba($link-color,.8) 16.5%,
+    rgba(0,0,0,0) 16.5%
+  );
+  text-shadow: white 1px 0px 0px, white -1px 0px 0px;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: $link-hover-color;
+  text-decoration: none;
+  background-image: linear-gradient(to top,
+    rgba(0,0,0,0) 13%,
+    rgba($link-hover-color,.8) 13%,
+    rgba($link-hover-color,.8) 16.5%,
+    rgba(0,0,0,0) 16.5%
+  );
+  text-shadow: white 1px 0px 0px, white -1px 0px 0px;
+}
+
+button,
+.button {
+  text-shadow: none;
+  background-image: none;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  color: white;
+  text-shadow: none;
+  background-image: none;
+}

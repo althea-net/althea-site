@@ -1,0 +1,80 @@
+@media screen and (min-width: $viewport-small) {
+  html {
+    font-size: 16px;
+  }
+
+  h1,
+  .h1 {
+    font-size: $h1;
+  }
+
+  .site-header {
+    text-align: left;
+  }
+
+  .site-nav {
+    margin-top: 0;
+  }
+
+  .site-header a {
+    font-size: $h4;
+  }
+
+  .site-header .site-title {
+    float: left;
+    font-size: $h2;
+    font-family: $heading-font-family;
+    img {
+      vertical-align: text-top;
+      width: $h2 * 1.5
+    }
+  }
+
+  .site-header .site-nav {
+    float: right;
+    margin-top: .25rem;
+  }
+
+  blockquote {
+    margin-left: $space-3;
+    padding: $space-3;
+  }
+
+  .social-icons-left {
+    text-align: left;
+  }
+
+  .social-icons-right {
+    text-align: right;
+  }
+  .hero {
+    display: block;
+  }
+}
+
+@media screen and (min-width: $viewport-medium) {
+  html {
+    font-size: 18px;
+  }
+  .hero {
+    .title {
+      font-size: 100px;
+      img {
+        width: 150px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $viewport-large) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: $viewport-large + 14) {
+  em img {
+    max-width: $measure-width + 14;
+    margin-left: -7em;
+  }
+}

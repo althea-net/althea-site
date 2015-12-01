@@ -8,36 +8,9 @@
     font-size: $h1;
   }
 
-  .site-header {
-    text-align: left;
-  }
-
-  .site-nav {
-    margin-top: 0;
-  }
-
-  .site-header a {
-    font-size: $h4;
-  }
-
-  .site-header .site-title {
-    float: left;
-    font-size: $h2;
-    font-family: $heading-font-family;
-    img {
-      vertical-align: text-top;
-      width: $h2 * 1.5
-    }
-  }
-
-  .site-header .site-nav {
-    float: right;
-    margin-top: .25rem;
-  }
-
   blockquote {
-    margin-left: $space-3;
-    padding: $space-3;
+    margin-left: $space-2;
+    padding: 0 $space-2;
   }
 
   .social-icons-left {
@@ -47,22 +20,11 @@
   .social-icons-right {
     text-align: right;
   }
-  .hero {
-    display: block;
-  }
 }
 
 @media screen and (min-width: $viewport-medium) {
   html {
     font-size: 18px;
-  }
-  .hero {
-    .title {
-      font-size: 100px;
-      img {
-        width: 150px;
-      }
-    }
   }
 }
 

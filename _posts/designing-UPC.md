@@ -1,0 +1,21 @@
+---
+layout:     post
+title:      Designing UPC
+## summary:
+---
+
+The simplest way to make this happen is for nodes to pay each other to forward packets. Nodes could pay per packet, but this would use a huge amount of extra bandwidth if a payment had to be made for every single packet. Processing these payments with conventional currencies would result in an at least an API call to the payment processor with every payment. It would also likely result in a database entry at the payment processor. Processing these payments with a cryptocurrency (saving each and every one to the blockchain) would quickly result in a very bloated blockchain. Payment packets would vastly outnumber data packets.
+
+What immediately comes to mind is having nodes keep a tally of payments to one another to reduce the total number of payments. This requires nodes to trust one another. If I am paying you to forward my packets, either I put a deposit down with you, or you extend me credit. In the former scenario, I need to trust you, while in the latter, you need to trust me. The less the amount of credit or deposit is, the more payments will need to be sent.
+
+What if there was a way to transfer money without trusting the other party, and without incurring the costs of a blockchain or conventional payment? This is the purpose of payment channels. In a payment channel, two parties deposit money with a third entity that both trust. If the channel is to transfer conventional currency, this third party would be a bank or payment processor which will hold onto money. If it's a cryptocurrency payment, the "third party" is a contract on a blockchain which locks funds from both parties. Both parties must then trust the integrity of that blockchain.
+
+Here's how it works: The bank or the blockchain will transfer the locked funds back to the channel participants upon receiving a message signed by both. This message also updates the amounts to be tranfered back. If Alice and Bob both deposited $100 to open the channel, and close it with balances of $95 and $105, Alice has effectively given Bob $5. So, to pay Bob, Alice signs a message updating her balance to $95 and Bob's balance to $105. She can send this message to Bob without contacting the bank or the blockchain that the channel is open with. This message is only sent from Alice to Bob, and it is small enough that it can be sent very frequently- as much as every few data packets. If Bob wants to get his money out, he simply posts the last signed message to the bank or the blockchain.
+
+There's one issue though- someone could cheat. Let's say that Bob forwards a bunch of packets for Alice and the balances are updated to Alice- $50 and Bob- $150. Then Alice forwards a bunch of packets for Bob, reversing the balances to Alice- $150, Bob- $50. Bob could take the old message where he has $150 and post it, cheating Alice out of $100.
+
+How to prevent this? We need some way for the bank or the blockchain to find out whether a message is the most recent one. If Alice and Bob put a "nonce" (number used once) on each message and increment it every message, either of them can prove if one message is more recent than another. If the bank or blockchain then waits a certain length of time (or "hold period") before transferring the money back, it gives either party a chance to prove that the other is cheating.
+
+This is the foundation of UPC. Now, if Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payment messages to their heart's content. But what about mobile nodes? Charlie has a cell phone, and happens to walk into range of Alice's wifi hotspot. Alice could forward Charlie's packets through Bob and on to their destination, but she's going to need some payment from Charlie. Alice and Charlie don't have a channel open- how will Charlie pay Alice? What if both Charlie and Alice have channels open with Darrell? Charlie could send Darrell a payment, who would then send Alice a payment. But now Charlie needs to trust Darrell.
+
+What if there's some way to make sure that Darrell can't steal the money? UPC allows us to make payments with "smart conditions". A smart condition is a piece of code which must return true to unlock some funds in a payment channel.

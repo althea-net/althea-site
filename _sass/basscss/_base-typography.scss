@@ -61,8 +61,11 @@ blockquote {
 
 blockquote,
 blockquote p {
-  font-size: $h3;
   font-style: italic;
+}
+
+blockquote p:last-of-type {
+  margin-bottom: 0;
 }
 
 h1,

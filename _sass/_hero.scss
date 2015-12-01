@@ -3,12 +3,21 @@
   text-align: center;
   padding-bottom: 40px;
   .title {
-    font-size: 72px;
+    font-size: $hero-font-size;
     font-family: $heading-font-family;
     display: inline-block;
     img {
       vertical-align: text-top;
-      width: 110px;
+      height: $hero-font-size * $bird-logo-multiplier;
     }
+  }
+}
+
+@media screen and (min-width: $viewport-medium) {
+  html {
+    font-size: 18px;
+  }
+  .hero {
+    display: block;
   }
 }

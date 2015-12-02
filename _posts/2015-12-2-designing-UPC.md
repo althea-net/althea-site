@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Designing UPC
+title:      Universal Payment Channels
 summary:    "Costless, instantaneous payments let us use money in a completely new way. Conventional payment processors impose arbitrary fees and delays, and cryptocurrencies can function only with inevitable confirmation times and blockchain bloat. Free from these constraints, we can create a new class of applications."
 ---
 

@@ -3,8 +3,7 @@ title:       Althea
 email:       jehan.tremback@gmail.com
 author:      Jehan Tremback
 description: "Incentivized mesh networks."
-baseurl:     /althea-site
-url:         http://jtremback.github.io/althea-site/
+url:         http://altheamesh.com
 date_format: "%b %-d, %Y"
 
 # Google services

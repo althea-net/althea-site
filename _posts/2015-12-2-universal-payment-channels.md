@@ -58,9 +58,11 @@ To route a payment through Darrell, Charlie sends Alice a secret, and the amount
 
 ![Step 7]({{ site.url }}/images/upc-step-7.png)
 
-To unlock the payment from Darrell, Alice reveals the secret to him, which allows Darrell to unlock the payment from Charlie. This all happens as fast as packets can be forwarded, and doesn't store anything on the blockchain or bank servers. It's an ideal mechanism to handle the high volume of payments that need to be processed by an incentivized mesh network.
+To unlock the payment from Darrell, Alice reveals the secret to him, which allows Darrell to unlock the payment from Charlie.
 
 ![Step 8]({{ site.url }}/images/upc-step-8.png)
+
+This all happens as fast as packets can be forwarded, and doesn't store anything on the blockchain or bank servers. It's an ideal mechanism to handle the high volume of payments that need to be processed by an incentivized mesh network.
 
 You may be wondering- how do we know that Darrell is the best intermediary node to route payments from Charlie to Alice? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
 

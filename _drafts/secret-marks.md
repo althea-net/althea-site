@@ -1,0 +1,3 @@
+To avoid loops in a routing protocol, nodes must be able to tell if they have previously handled a piece of data. Otherwise routing loops can result, where nodes continue to forward the same routing message in a loop indefinitely. Time to live (TTL) is a number that is added to a routing message and decremented each time it is forwarded. This can mitigate routing loops, but it is kind of a bandaid. Also, it leaks information about the source of a routing message. A node with a high TTL can be presumed to be early in the route.
+
+We need someting better. One technique would be to add an array to each routing message. Each node then inserts a random number into the array and remembers the number. When a node then gets the routing message, it checks if it includes a

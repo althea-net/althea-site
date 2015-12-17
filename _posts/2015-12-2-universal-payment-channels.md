@@ -66,3 +66,5 @@ This all happens as fast as packets can be forwarded, and doesn't store anything
 You may be wondering- how do we know that Darrell is the best intermediary node to route payments from Charlie to Alice? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
 
 For a more complete overview of UPC, see the [white paper]({{ site.url }}/documents/universal-payment-channels.pdf).
+
+Acknowledgement: Payment channels utilizing a hold period in this way were, to the best of my knowledge, first introduced in Zackary Hess's [Flying Fox](https://github.com/BumblebeeBat/FlyingFox).

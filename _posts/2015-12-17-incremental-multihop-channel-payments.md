@@ -9,7 +9,7 @@ What am I talking about, and why would you need it? Let's use the example of an 
 
 Still, multihop payments can result in a lot of network traffic if the route is unknown. Depending on the routing protocol, there may be a search of the network for every multihop payment channel route (RPR currently floods the network for every route request). We need some way to allow for many payments with only one route request. We can do this with a multi-hashlock:
 
-```
+~~~
 
 condition(fulfillment)
   // An array of 1000 hashed secrets
@@ -27,7 +27,7 @@ condition(fulfillment)
   // (the total transfer amount will be proportional to this)
   return numerator / 1000
 
-```
+  ~~~
 
 With a multi-hashlock, progressively more of the payment is unlocked depending on how many correct secrets are passed in through the fulfillment.
 

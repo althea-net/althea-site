@@ -9,25 +9,21 @@ What am I talking about, and why would you need it? Let's use the example of an 
 
 Still, multihop payments can result in a lot of network traffic if the route is unknown. Depending on the routing protocol, there may be a search of the network for every multihop payment channel route (RPR currently floods the network for every route request). We need some way to allow for many payments with only one route request. We can do this with a multi-hashlock:
 
-~~~
+    condition(fulfillment)
+      // An array of 1000 hashed secrets
+      hashes = [xyz123, abc789, ... ]
+      numerator = 0
 
-condition(fulfillment)
-  // An array of 1000 hashed secrets
-  hashes = [xyz123, abc789, ... ]
-  numerator = 0
+      // A 'for' loop that will run 1000 times
+      for i in 0..1000:
+        // If the hashed secret is correct
+        if sha3(fulfillment[i]) === hashes[i]:
+          // Add 1 to the numerator
+          numerator++
 
-  // A 'for' loop that will run 1000 times
-  for i in 0..1000:
-    // If the hashed secret is correct
-    if sha3(fulfillment[i]) === hashes[i]:
-      // Add 1 to the numerator
-      numerator++
-
-  // Return the fraction of secrets that were correct
-  // (the total transfer amount will be proportional to this)
-  return numerator / 1000
-
-  ~~~
+      // Return the fraction of secrets that were correct
+      // (the total transfer amount will be proportional to this)
+      return numerator / 1000
 
 With a multi-hashlock, progressively more of the payment is unlocked depending on how many correct secrets are passed in through the fulfillment.
 

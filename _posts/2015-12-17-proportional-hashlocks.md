@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Proportional hashlocks
-summary:    "The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment that is released incrementally."
+summary:    "The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment which is released incrementally."
 ---
 
 In an incentivized mesh network, some nodes will be stationary, and some will move. We can set up payment channels between the stationary nodes, and they can pay one another with those. But what about mobile nodes who may only be within range of one another for short amounts of time? A payment channel takes at least a few minutes to set up, if we're going to wait for a sufficient number of confirmations (or even longer if it's a conventional currency and we're dealing with a bank). This is why we have multihop payments. By routing a payment across several existing payment channels, we don't have to wait for a new channel to be set up.
@@ -10,7 +10,7 @@ Multihop payments can result in a lot of network traffic if we don't know what r
 
 Instead of having smart conditions return either true or false we can have them return a fraction (see [Flying Fox](https://github.com/BumblebeeBat/FlyingFox)). The transfer amount of the hashlock is multiplied by the fraction. This way, smart conditions have fine grained control over what fraction of a payment gets transfered. This gives us the option to build more sophisticated smart conditions.
 
-The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment that is released incrementally. Its properties are similar to a low level payment channel in that individual payments are very cheap, and either participant can leave at any time and get all the money they are entitled to. However, this channel only goes one way.
+The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment which is released incrementally. Its properties are similar to a low level payment channel in that individual payments are very cheap, and either participant can leave at any time and get all the money they are entitled to. However, this channel only goes one way.
 
 ## Proportional hashlock smart condition:
 

@@ -7,7 +7,9 @@ Instead of having smart conditions return either true or false we can have them 
 
 What am I talking about, and why would you need it? Let's use the example of an incentivized mesh network. We can set up payment channels between the stationary nodes, and they can pay one another with those. But what about mobile nodes who may only be within range of another for short amounts of time? A payment channel takes at least a few minutes to set up, if we're going to wait for a sufficient number of confirmations. Also, setting up a new payment channel is going to add bloat to the blockchain. This is why we have multihop payments. By routing a payment across several existing payment channels, we don't add anything to the blockchain or talk to the bank.
 
-Still, multihop payments can result in a lot of network traffic if the route is unknown. Depending on the routing protocol, there may be a search of the network for every multihop payment channel route (RPR currently floods the network for every route request). We need some way to allow for many payments with only one route request. We can do this with a multi-hashlock:
+Still, multihop payments can result in a lot of network traffic if we don't know what route the payment will take. Depending on the payment routing protocol, there may be a search of the network for every multihop payment (RPR, a payment channel routing protocol, currently does this). This is probably not a huge deal. Still, since larger payments will have proportionally smaller fees, nodes can save money if they consolidate small multihop payments.
+
+We need some way to allow for many payments with only one route request. We can do this with a multi-hashlock:
 
 ```
 condition(fulfillment)
@@ -26,6 +28,6 @@ condition(fulfillment)
   return numerator / 1000
 ```
 
-With a multi-hashlock, progressively more of the payment is unlocked depending on how many correct secrets are passed in through the fulfillment.
+With a multi-hashlock, progressively more of the payment is unlocked depending on how many correct secrets are passed in.
 
 A multihop payment for the full amount of the multi-hashlock is routed, using whichever inefficient routing protocol. Once the route is found, multi-hashlocked payments are made along the entire route. As the source of the payment wishes to pay the destination, it releases successive secrets to the destination. These can be cached by the destination, or immediately passed to the next node in line.

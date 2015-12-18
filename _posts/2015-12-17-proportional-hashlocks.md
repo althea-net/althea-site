@@ -12,7 +12,7 @@ Instead of having smart conditions return either true or false we can have them 
 
 The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a chain of multihop payments which are released incrementally. Its properties are similar to a low level payment channel in that individual payments are very cheap, and either participant can leave at any time and get all the money they are entitled to. However, this channel only goes one way.
 
-#### Proportional hashlock smart condition:
+## Proportional hashlock smart condition:
 
     condition(secrets)
       // An array of 1000 hashed secrets
@@ -36,7 +36,10 @@ The proportional hashlock gives us the ability to build a sort of higher level m
 
     Numerator: 0
 
-    Take this list of hashes and compare them to a list of secrets that you will be given. Hash each secret in the secrets list, and compare it to the corresponding hash from the hash list. If they match, add 1 to Numerator.
+    Take this list of hashes and compare them to a list of secrets that you
+    will be given. Hash each secret in the secrets list, and compare it to
+    the corresponding hash from the hash list. If they match, add 1 to
+    Numerator.
 
     return Numerator / 1000
 
@@ -54,23 +57,23 @@ Alice would like to pay Erin.
 
 - If it does, it considers the payment complete (At this point, the channel could be closed and Erin would be able to redeem 1 1/1000 of the channel amount, or $1).
 
-##### Caching
+## Caching
 
-What if Erin caches secrets without passing them on to Doris? If Doris then sends Erin another payment on that channel that would result in Doris not having enough liquidity to honor the cached secrets, Erin must refuse that payment (and possibly request that Doris close out the channel and open a new channel with more liquidity).
+What if Erin caches secrets without passing them on to Doris? If Doris then sends Erin another payment on that channel that would result in Doris not having enough liquidity to honor the cached secrets, Erin is incentivized to refuse that payment (and possibly request that Doris close out the channel and open a new channel with more liquidity). Until that point, Erin can cache the secrets as much as she wants. This is good if the number of individual payments is very high.
 
-##### Closing the proportional hashlock
+## Closing the proportional hashlock
 
-What happens if Alice and Erin never make another payment? Doris can request that Erin sign an update transaction eliminating the proportional hashlock. Once this is done, Alice can send the secrets to Doris, but this will only serve to have Alice pay Doris the remainder.
+What happens if Alice and Erin never make another payment? Doris can request that Erin sign an update transaction eliminating the proportional hashlock.
 
 What if Charlie wants to close the proportional hashlock? He can let Doris know that he wants to do this. At this point Doris can request that Erin sign an update transaction eliminating the proportional hashlock. If Doris does not do this, then Charlie can simply close the channel between him and Doris.
 
-##### Possible exploit? Alice sends the secrets to Charlie:
+## Possible exploit? Alice sends the secrets to Charlie:
 
 What if Alice sends secrets to Charlie instead of Erin? Charlie will be able to redeem the proportion of the payment that Alice sent him the secrets for, and so will Bob. In effect, Alice is paying Charlie. Now, if Alice sends those same secrets to Erin, Erin can use them to get a payment from Doris. Doris can use them to get a payment from Charlie.
 
 So Charlie can't trust a payment from Alice, unless he can get Doris to agree to close their proportional hashlock immediately afterwards. But this doesn't matter, because Charlie is not supposed to be receiving the secrets from Alice anyway.
 
-##### What is it good for?
+## What is it good for?
 
 The actions taken in this scenario, and the incentives, are similar to a scenario where Alice sends Erin a series of separate normal multihop payments over the same set of intermediary nodes. The difference is that a payment of a certain size can be set up beforehand and then released slowly, with secrets flowing in one direction, without new payments needing to be set up. The secrets are also cache-able, and can be released in blocks. Also, the payment can be routed as one payment, which can reduce routing traffic. A lot of these goals could probably be accomplished in the routing protocol, but depending on how it was done, they could compromise the strong anonymity guarantees offered by routing protocols such as RPR.
 

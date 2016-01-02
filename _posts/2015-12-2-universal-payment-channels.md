@@ -43,27 +43,27 @@ This is the foundation of Universal Payment Channels (technical details in the [
 
 Back to the incentivized mesh example: If Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payments to their heart's content. But what about mobile nodes? Charlie has a cell phone, and happens to walk into range of Alice's wifi hotspot. Alice could forward Charlie's packets through Bob and on to their destination, but she's going to need some payment from Charlie. Alice and Charlie don't have a channel open- how will Charlie pay Alice?
 
-What if both Charlie and Alice have channels open with Darrell? Charlie could send Darrell a payment, who would then send Alice a payment. But now Charlie needs to trust Darrell.
+What if both Charlie and Alice have channels open with Bob? Charlie could send Bob a payment, who would then send Alice a payment. But now Charlie needs to trust Bob.
 
 #### Smart conditions and hashlocks
 
-We have to make sure that Darrell can't steal the money. UPC allows us to make payments with pieces of code called "smart conditions". The bank or blockchain evaluates the smart condition, to find out whether it should transfer some money. We can make a type of smart condition called a hashlock which allows us to trustlessly route payments through one or more intermediary nodes. A hashlock basically says: "transfer this amount of money if you are given the string that hashes to this hash".
+We have to make sure that Bob can't steal the money. UPC allows us to make payments with pieces of code called "smart conditions". The bank or blockchain evaluates the smart condition, to find out whether it should transfer some money. We can make a type of smart condition called a hashlock which allows us to trustlessly route payments through one or more intermediary nodes. A hashlock basically says: "transfer this amount of money if you are given the string that hashes to this hash".
 
 > A hashing function turns whatever value you give it into a random-looking string of characters, known as a "hash". For instance, the string "alfred" might be turned into "d8si32" by a hashing function. This has two interesting properties: the same hashing function will always turn "alfred" into "d8si32", and someone who has "d8si32" has no way of knowing that it was derived from "alfred". So, if Jim wants Gregory to be able to recognize that someone has the correct secret word, but Jim doesn't want to actually give Gregory the secret, Jim can give Gregory a hash of the secret. If someone gives Gregory a word they claim is the secret, Gregory can hash it and find out whether it is the correct word.
 
 #### Trustless multihop payments with hashlocks
 
-To route a payment through Darrell, Charlie sends Alice a secret, and the amount of the payment. Charlie then sends a payment to Darrell, hashlocked with the secret he sent Alice. Darrell sends his own payment message to Alice, hashlocked with the same secret, and containing a payment of the same amount.
+To route a payment through Bob, Charlie sends Alice a secret, and the amount of the payment. Charlie then sends a payment to Bob, hashlocked with the secret he sent Alice. Bob sends his own payment message to Alice, hashlocked with the same secret, and containing a payment of the same amount.
 
 ![Step 7]({{ site.url }}/images/upc-step-7.png)
 
-To unlock the payment from Darrell, Alice reveals the secret to him, which allows Darrell to unlock the payment from Charlie.
+To unlock the payment from Bob, Alice reveals the secret to him, which allows Bob to unlock the payment from Charlie.
 
 ![Step 8]({{ site.url }}/images/upc-step-8.png)
 
 This all happens as fast as packets can be forwarded, and doesn't store anything on the blockchain or bank servers. It's an ideal mechanism to handle the high volume of payments that need to be processed by an incentivized mesh network.
 
-You may be wondering- how do we know that Darrell is the best intermediary node to route payments from Charlie to Alice? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
+You may be wondering- how do we know that Bob is the best intermediary node to route payments from Charlie to Alice? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
 
 For a more complete overview of UPC, see the [white paper]({{ site.url }}/documents/universal-payment-channels.pdf).
 

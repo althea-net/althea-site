@@ -41,7 +41,7 @@ This is the foundation of Universal Payment Channels (technical details in the [
 
 ## Multihop payments {#multihop}
 
-Back to the incentivized mesh example: If Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payments to their heart's content. But what about mobile nodes? Alice has a cell phone, and happens to walk into range of Charlie's wifi hotspot. Charlie could forward Alice's packets through Bob and on to their destination, but he's going to need some payment from Alice. Charlie and Alice don't have a channel open- how will Alice pay Charlie?
+Back to the incentivized mesh example: If Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payments to their heart's content. But what about mobile nodes? Alice has a cell phone, and happens to walk into range of Charlie's wifi hotspot. Charlie could forward Alice's packets on to their destination, but he's going to need some payment from Alice. Charlie and Alice don't have a channel open- how will Alice pay Charlie?
 
 What if both Alice and Charlie have channels open with Bob? Alice could send Bob a payment, who would then send Charlie a payment. But now Alice needs to trust Bob.
 

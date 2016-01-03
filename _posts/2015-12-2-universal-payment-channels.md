@@ -41,9 +41,9 @@ This is the foundation of Universal Payment Channels (technical details in the [
 
 ## Multihop payments {#multihop}
 
-Back to the incentivized mesh example: If Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payments to their heart's content. But what about mobile nodes? Charlie has a cell phone, and happens to walk into range of Alice's wifi hotspot. Alice could forward Charlie's packets through Bob and on to their destination, but she's going to need some payment from Charlie. Alice and Charlie don't have a channel open- how will Charlie pay Alice?
+Back to the incentivized mesh example: If Alice and Bob both have nodes in an incentivized mesh network, they can open a channel in whatever currency they wish, and exchange packets and payments to their heart's content. But what about mobile nodes? Alice has a cell phone, and happens to walk into range of Charlie's wifi hotspot. Charlie could forward Alice's packets through Bob and on to their destination, but he's going to need some payment from Alice. Charlie and Alice don't have a channel open- how will Alice pay Charlie?
 
-What if both Charlie and Alice have channels open with Bob? Charlie could send Bob a payment, who would then send Alice a payment. But now Charlie needs to trust Bob.
+What if both Alice and Charlie have channels open with Bob? Alice could send Bob a payment, who would then send Charlie a payment. But now Alice needs to trust Bob.
 
 #### Smart conditions and hashlocks
 
@@ -53,17 +53,17 @@ We have to make sure that Bob can't steal the money. UPC allows us to make payme
 
 #### Trustless multihop payments with hashlocks
 
-To route a payment through Bob, Charlie sends Alice a secret, and the amount of the payment. Charlie then sends a payment to Bob, hashlocked with the secret he sent Alice. Bob sends his own payment message to Alice, hashlocked with the same secret, and containing a payment of the same amount.
+To route a payment through Bob, Alice sends Charlie a secret, and the amount of the payment. Alice then sends a payment to Bob, hashlocked with the secret she sent Charlie. Bob sends his own payment message to Charlie, hashlocked with the same secret, and containing a payment of the same amount.
 
 ![Step 7]({{ site.url }}/images/upc-step-7.png)
 
-To unlock the payment from Bob, Alice reveals the secret to him, which allows Bob to unlock the payment from Charlie.
+To unlock the payment from Bob, Charlie reveals the secret to him, which allows Bob to unlock the payment from Alice.
 
 ![Step 8]({{ site.url }}/images/upc-step-8.png)
 
 This all happens as fast as packets can be forwarded, and doesn't store anything on the blockchain or bank servers. It's an ideal mechanism to handle the high volume of payments that need to be processed by an incentivized mesh network.
 
-You may be wondering- how do we know that Bob is the best intermediary node to route payments from Charlie to Alice? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
+You may be wondering- how do we know that Bob is the best intermediary node to route payments from Alice to Charlie? Stay tuned for the next post, about Reactive Payment Routing, a routing protocol which finds the cheapest path for payments.
 
 For a more complete overview of UPC, see the [white paper]({{ site.url }}/documents/universal-payment-channels.pdf).
 

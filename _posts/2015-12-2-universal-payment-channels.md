@@ -29,7 +29,7 @@ There's one issue though- someone could cheat. Let's say that Bob makes a paymen
 
 ![Step 4]({{ site.url }}/images/upc-step-4.png)
 
-How to prevent this? We need some way for the bank or the blockchain to find out whether a message represents the account balances that Alice and Bob most recently agreed on. If Alice and Bob put a "nonce" (number used once) on each message and increment it every message, either of them can prove if one message is more recent than another. If the bank or blockchain then waits a certain length of time (or "hold period") before transferring the money back, it gives either party a chance to prove that the other is cheating.
+How to prevent this? We need some way for the bank or the blockchain to find out whether a message represents the account balances that Alice and Bob most recently agreed on. If Alice and Bob put a sequence number on each message and increment it every message, either of them can prove if one message is more recent than another. If the bank or blockchain then waits a certain length of time (or "hold period") before transferring the money back, it gives either party a chance to prove that the other is cheating.
 
 ![Step 5]({{ site.url }}/images/upc-step-5.png)
 

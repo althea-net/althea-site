@@ -4,6 +4,8 @@ title:      Proportional hashlocks
 summary:    "The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment which is released incrementally."
 ---
 
+*This post assumes a pretty in-depth understanding of UPC and various cryptography concepts. Read [the UPC blog post]({% post_url 2015-12-2-universal-payment-channels %}) if you haven't already.*
+
 In an incentivized mesh network, some nodes will be stationary, and some will move. We can set up payment channels between the stationary nodes, and they can pay one another with those. But what about mobile nodes who may only be within range of one another for short amounts of time? A payment channel takes at least a few minutes to set up, if we're going to wait for a sufficient number of confirmations (or even longer if it's a conventional currency and we're dealing with a bank). This is why we have multihop payments. By routing a payment across several existing payment channels, we don't have to wait for a new channel to be set up.
 
 Multihop payments can result in a lot of network traffic if we don't know what route the payment will take. Depending on the payment routing protocol, there may be a search of the network for every multihop payment (RPR, a payment channel routing protocol, currently does this).

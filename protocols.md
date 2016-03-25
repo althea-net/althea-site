@@ -13,7 +13,7 @@ UPC provides the mechanism by which clients pay routers, and routers pay each ot
 - Payments are created simply by cryptographically signing a message.
 - Instant- the system does not need to wait for a payment to clear, or for a certain number of blocks to confirm.
 
-[Read the white paper]({{ site.url }}/blog/universal-payment-channels/)
+[Read the white paper]({{ site.url }}/blog/universal-payment-channels)
 
 ## Reactive Payment Routing
 

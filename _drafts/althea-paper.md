@@ -26,11 +26,11 @@ Babel provides a mechanism for extensibility, which is the basis for the modific
 
 Babel is a good fit for routing based on payments because of its method of operation, known as "distance vector". 
 
-![](http://localhost:4000/images/pir1.png)
+![]({{ site.url }}/images/pir1.png)
 
 Distance vector routing works by assigning a quality metric to the links between nodes, where higher is worse. Nodes then gossip information about which nodes they can reach at which quality. From this information, each node is able to build up a routing table containing the all destinations in the network, along with their composite quality metric, and the neighbor to forward packets for a destination.
 
-![](http://localhost:4000/images/pir2.png)
+![]({{ site.url }}/images/pir2.png)
 
 This extension allows a Babel router to attach information about monetary price to the routes that it maintains. The router also propagates this information to its neighbors, who use it to determine their own prices. The price is taken into account for metric computation and route selection. It is also used by a payment protocol external to Babel (defined below in “Payments”) to pay neighbors to forward data.
 
@@ -69,7 +69,7 @@ The important thing about a payment channel is that after the channel has been o
 
 When Alice wishes to send a packet to a destination (Charlie) on the network, she consults her routing table to find the best neighbor to forward it to. This routing table was built up by Babel, taking link quality and price (as computed in [section 1.2]({{ site.url }}/blog/althea-paper/#payments) above) into account, so the neighbor will be the one judged to have the best and cheapest route to the destination. Alice then appends a state update for her payment channel with Bob to the packet which pays him the rate that he is advertising for that destination. When Bob receives the packet and the payment, he forwards the packet on to his best neighbor, paying them the fee they charge to get a packet to that destination. Since Bob has set his fee to slightly higher that what his neighbor is charging to get to that destination, he will make a profit. This process continues until the packet reaches its destination.
 
-![](http://localhost:4000/images/payment-flow.png)
+![]({{ site.url }}/images/payment-flow.png)
 
 In this way, Alice can send packets to any packet in the network, while transmitters along the way are compensated.
 

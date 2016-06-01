@@ -37,7 +37,7 @@ What if Alice and Bob don't want to wait to get their money out? They can simply
 
 ![Step 6]({{ site.url }}/images/upc-step-6.png)
 
-This is the foundation of Universal Payment Channels (technical details in the [white paper](#)).
+This is the foundation of Universal Payment Channels (technical details in the [white paper]({{ site.url }}/documents/universal-payment-channels.pdf)).
 
 ## Multihop payments {#multihop}
 

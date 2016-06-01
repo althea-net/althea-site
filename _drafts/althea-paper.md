@@ -62,7 +62,7 @@ where `m` is the metric, `p` is the price, and `n` is a constant multiplier.
 
 Aside: It was hard to choose whether to make this a route selection procedure, extending section 3.6, or a metric computation, extending section 3.5.2. We chose to make it a route selection procedure, as metrics computed by section 3.5.2 are propagated to a node’s neighbors. Since the price is already propagated by this extension, it seems like a bad idea to propagate it again as a factor in the route metric. There is a possibility that this decision will need to be revisited.
 
-###[2] Payments
+##[2] Payments
 Each node on the network establishes payment channels with each of its neighbors. A payment channel is a method for two parties to exchange payments trustlessly by signing transactions that alter the balance of an escrow account held by a bank or blockchain (we may use the Ethereum blockchain for Althea).
 
 The important thing about a payment channel is that after the channel has been opened, and funds have been placed in escrow, individual payments can be made directly between the two parties without submitting anything to the bank or blockchain. This means that the entire payment can be completed in one packet. Most payment systems need to send another transmission to a bank or blockchain, and wait for it to be confirmed. This would be too much overhead for use with Althea, which is why payment channels are used instead.
@@ -73,24 +73,8 @@ When Alice wishes to send a packet to a destination (Charlie) on the network, sh
 
 In this way, Alice can send packets to any packet in the network, while transmitters along the way are compensated.
 
-Incentivizing uplinks
-This is great if, say, neighbors want to send messages in a local area. But how can this system be used to provide access to the broader internet? It’s important to note that in this system, nodes pay only to send packets. Payments are unidirectional. How can this be used to pay for bidirectional data?
 
-Let’s say that Alice is an end consumer. She has a router that she has loaded up with tokens. Doris is somewhere else on the network, and has a connection to the internet through a commercial ISP or transit provider. We’ll say that Doris is an “uplink” to the rest of the internet.
+##[3] Vulnerabilities
+As you may have noticed, this system is vulnerable. Babel makes no provision for hostile nodes. Under this protocol, any node can advertise a cost of 0 to every destination on the network, and have all traffic from its neighbors routed through it, and receive payment (while dropping the packets, or offering worse than advertised performance and reliability). There are also other, more subtle exploits.
 
-Bob and Charlie, on the other hand, are intermediary nodes and can carry packets from Alice to Doris and vice-versa. Alice makes a request to Doris for a movie from the internet. Alice pays Bob for the packets of her request to be delivered to Doris, and Bob pays Charlie. Now that Doris has the request, she can get the data from the internet and send it to Alice. Remember, Doris will have to pay for the data to be sent to Alice. Doris probably also wants to be paid for getting the data off the internet, on top of what it costs to send it to Alice.
-
-Alice needs to be able to pay Doris without having to trust Doris. Alice can set up a payment channel with Doris, like she has with her immediate neighbors. As Doris sends Alice data, Alice sends acknowledgements along with channel updates paying Doris. The first time Alice connects to Doris, she sends a blockchain transaction opening a new channel with Doris. Doris submits this to the blockchain. Now Alice can start buying data from Doris.
-
-How does Alice know that Doris has a connection to the internet that she would like to sell? Babel already propagates information about link quality to every node, so it can also propagate information about additional services offered by each node. See __ for the Babel extension needed to do this.
-
-Quality Monitoring:
-Alice must be able to verify that intermediary nodes in the local Althea network, and uplink providers are delivering the quality of service that she is paying for.
-
-Intermediary nodes:
-Using Babel, Alice builds up a routing table which contains every neighbor’s expected link quality to every destination. One of Alice’s neighbors might be advertising the quality to a given destination falsely.
-
-Uplink providers:
-An uplink provider might also try to advertise their capacity incorrectly, supplying less capacity than advertised. This would take the form of dropped packets. These are easily detected. The difficulty is identifying whether the node at fault is an intermediary node, or the uplink.
-
-Nodes consuming internet send payments to the uplink provider along with acknowledgements for received packets. A consumer node simply does not pay if packets are not received. What if a consumer node pays for less data than they have received? The uplink provider does not know whether the packets were lost by the intermediary nodes, or whether the consumer is cheating.
+There is some work on securing Babel and other distance vector routing protocols. However, this work tends to focus on the vulnerabilities that could occur in a network without monetary incentives. There are remedies for DOS, 

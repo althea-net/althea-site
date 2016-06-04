@@ -1,6 +1,7 @@
 ---
 layout:     post
-title:      Althea Draft 1
+title:      Althea in-progress white paper
+summary:    "I'm working on the white paper for the full Althea system. This post is subject to frequent changes."
 ---
 
 Althea is a set of protocols for a decentralized point-to-point radio network providing connectivity to an area, where participants in the network are able to pay for connectivity, and receive payment for their contributions to the network, without a centralized ISP collecting subscriptions and owning equipment. It combines the commercial viability of a wireless ISP with the decentralized nature of a community mesh network. There are two main components- payments and routing.
@@ -77,4 +78,21 @@ In this way, Alice can send packets to any packet in the network, while transmit
 ##[3] Vulnerabilities
 As you may have noticed, this system is vulnerable. Babel makes no provision for hostile nodes. Under this protocol, any node can advertise a cost of 0 to every destination on the network, and have all traffic from its neighbors routed through it, and receive payment (while dropping the packets, or offering worse than advertised performance and reliability). There are also other, more subtle exploits.
 
-There is some work on securing Babel and other distance vector routing protocols. However, this work tends to focus on the vulnerabilities that could occur in a network without monetary incentives. There are remedies for DOS, 
+There is some work on securing Babel and other distance vector routing protocols. However, this work tends to focus on the vulnerabilities that could occur in a network without monetary incentives. There are mitigations for DOS, impersonation of other nodes, and blackhole attacks. For now, we will consider these attacks to be outside of the scope of Althea. Satisfactory solutions need to be found, but this research is specific to Babel. 
+
+Many of these mitigations assume a threat model where an adversary is attempting to disrupt or censor a network. We are more concerned about the treat model of many unscrupulous adversaries who are simply trying to defraud the network to get some incrementally higher total payment than they would otherwise.
+
+Let's say that Alice and Bob are neighbors. Bob learns that he can reach Doris with a quality of 4. However, he tells Alice that he can reach Doris with a quality of 3. Alice routes her packets to Doris through Bob and pays him, although Bob is not the best route. This type of "false advertisement" attack is specific to Althea, because the adversary's motivation is monetary.
+
+####[3.1] Cost metric validation
+For Alice to catch Bob attempting a false advertisement attack, she must be able to check that the quality metric that Bob is reporting for a destination is truthful. Distance vector functions by summing the quality metric that nodes report about their neighbors.
+
+![]({{ site.url }}/images/honest-metric.png)
+The distance vector cost to D seen by A is the summation of the link costs of all the links along the best route. Depending on the link quality metric used, it should be possible for this summation to be roughly equal to the overall link cost computed by A between it and D.
+
+This overall link cost can be computed in the same way that the individual link quality costs are computed, by analyzing percentage of succesfully acknowledged transmissions over a given time period.
+
+![]({{ site.url }}/images/dishonest-metric.png)
+If someone on the route is advertising a lower (better) quality metric than they are actually able to provide, the distance vector cost seen by A will differ from the overall link cost.
+
+From these primitives, it should be possible to build an anti-cheating protocol. The simplest implementation would be to compute an honesty score for each neighbor, and let a human operator choose to disconnect from a neighbor with an especially bad score.

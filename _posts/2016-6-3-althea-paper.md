@@ -6,7 +6,7 @@ summary:    "I'm working on the white paper for the full Althea system. This pos
 
 Althea is a set of protocols for a decentralized point-to-point radio network providing connectivity to an area, where participants in the network are able to pay for connectivity, and receive payment for their contributions to the network, without a centralized ISP collecting subscriptions and owning equipment. It combines the commercial viability of a wireless ISP with the decentralized nature of a community mesh network. There are two main components- payments and routing.
 
-##[1] Routing
+## [1] Routing
 Nodes route packets using an ad-hoc “mesh” routing protocol. This protocol must take price as well as link quality into account. We define several extensions to Babel, a popular and performant ad-hoc routing protocol.
 
 Here’s an excerpt to give you an idea of how Babel works:
@@ -23,7 +23,7 @@ Here’s an excerpt to give you an idea of how Babel works:
 
 Babel provides a mechanism for extensibility, which is the basis for the modifications defined in this paper.
 
-###[1.2] Babel extension: Price-aware routing
+### [1.2] Babel extension: Price-aware routing
 
 Babel is a good fit for routing based on payments because of its method of operation, known as "distance vector". 
 
@@ -35,13 +35,13 @@ Distance vector routing works by assigning a quality metric to the links between
 
 This extension allows a Babel router to attach information about monetary price to the routes that it maintains. The router also propagates this information to its neighbors, who use it to determine their own prices. The price is taken into account for metric computation and route selection. It is also used by a payment protocol external to Babel (defined below in “Payments”) to pay neighbors to forward data.
 
-####[1.2.1] Changes to data structures
+#### [1.2.1] Changes to data structures
 
 A router implementing price-aware routing has one additional field in each route table entry:
 
 - A price field, denoting how much the router charges to forward packets along this route. 
 
-####[1.2.3] Receiving updates
+#### [1.2.3] Receiving updates
 
 When a node receives an Update TLV, it creates or updates a routing table entry according to Babel, section 3.5.4.  A node that performs price-aware routing extends that procedure by setting the routing table entry price field to `p'`, where: 
 
@@ -49,7 +49,7 @@ When a node receives an Update TLV, it creates or updates a routing table entry 
 
 Let `p` be the price attached to the received Update TLV. Let `l` be the price per kilobyte charged by the Babel router to forward packets along the update’s route. Determination of `l` is implementation-dependent, but for a simple implementation, a single `l` can be used for all routes.
 
-####[1.2.4] Route selection
+#### [1.2.4] Route selection
 
 Route selection is discussed in Babel, section 3.6. The exact procedure is left as an implementation detail but a simple example is:
 
@@ -63,7 +63,7 @@ where `m` is the metric, `p` is the price, and `n` is a constant multiplier.
 
 Aside: It was hard to choose whether to make this a route selection procedure, extending section 3.6, or a metric computation, extending section 3.5.2. We chose to make it a route selection procedure, as metrics computed by section 3.5.2 are propagated to a node’s neighbors. Since the price is already propagated by this extension, it seems like a bad idea to propagate it again as a factor in the route metric. There is a possibility that this decision will need to be revisited.
 
-##[2] Payments
+## [2] Payments
 Each node on the network establishes payment channels with each of its neighbors. A payment channel is a method for two parties to exchange payments trustlessly by signing transactions that alter the balance of an escrow account held by a bank or blockchain (we may use the Ethereum blockchain for Althea).
 
 The important thing about a payment channel is that after the channel has been opened, and funds have been placed in escrow, individual payments can be made directly between the two parties without submitting anything to the bank or blockchain. This means that the entire payment can be completed in one packet. Most payment systems need to send another transmission to a bank or blockchain, and wait for it to be confirmed. This would be too much overhead for use with Althea, which is why payment channels are used instead.
@@ -75,7 +75,7 @@ When Alice wishes to send a packet to a destination (Charlie) on the network, sh
 In this way, Alice can send packets to any packet in the network, while transmitters along the way are compensated.
 
 
-##[3] Vulnerabilities
+## [3] Vulnerabilities
 As you may have noticed, this system is vulnerable. Babel makes no provision for hostile nodes. Under this protocol, any node can advertise a cost of 0 to every destination on the network, and have all traffic from its neighbors routed through it, and receive payment (while dropping the packets, or offering worse than advertised performance and reliability). There are also other, more subtle exploits.
 
 There is some work on securing Babel and other distance vector routing protocols. However, this work tends to focus on the vulnerabilities that could occur in a network without monetary incentives. There are mitigations for DOS, impersonation of other nodes, and blackhole attacks. For now, we will consider these attacks to be outside of the scope of Althea. Satisfactory solutions need to be found, but this research is specific to Babel. 
@@ -84,7 +84,7 @@ Many of these mitigations assume a threat model where an adversary is attempting
 
 Let's say that Alice and Bob are neighbors. Bob learns that he can reach Doris with a quality of 4. However, he tells Alice that he can reach Doris with a quality of 3. Alice routes her packets to Doris through Bob and pays him, although Bob is not the best route. This type of "false advertisement" attack is specific to Althea, because the adversary's motivation is monetary.
 
-####[3.1] Cost metric validation
+#### [3.1] Cost metric validation
 For Alice to catch Bob attempting a false advertisement attack, she must be able to check that the quality metric that Bob is reporting for a destination is truthful. Distance vector functions by summing the quality metric that nodes report about their neighbors.
 
 ![]({{ site.url }}/images/honest-metric.png)

@@ -27,11 +27,11 @@ Babel provides a mechanism for extensibility, which is the basis for the modific
 
 Babel is a good fit for routing based on payments because of its method of operation, known as "distance vector". 
 
-![]({{ site.url }}/images/pir1.png)
+![](/images/pir1.png)
 
 Distance vector routing works by assigning a quality metric to the links between nodes, where higher is worse. Nodes then gossip information about which nodes they can reach at which quality. From this information, each node is able to build up a routing table containing the all destinations in the network, along with their composite quality metric, and the neighbor to forward packets for a destination.
 
-![]({{ site.url }}/images/pir2.png)
+![](/images/pir2.png)
 
 This extension allows a Babel router to attach information about monetary price to the routes that it maintains. The router also propagates this information to its neighbors, who use it to determine their own prices. The price is taken into account for metric computation and route selection. It is also used by a payment protocol external to Babel (defined below in “Payments”) to pay neighbors to forward data.
 
@@ -68,9 +68,9 @@ Each node on the network establishes payment channels with each of its neighbors
 
 The important thing about a payment channel is that after the channel has been opened, and funds have been placed in escrow, individual payments can be made directly between the two parties without submitting anything to the bank or blockchain. This means that the entire payment can be completed in one packet. Most payment systems need to send another transmission to a bank or blockchain, and wait for it to be confirmed. This would be too much overhead for use with Althea, which is why payment channels are used instead.
 
-When Alice wishes to send a packet to a destination (Charlie) on the network, she consults her routing table to find the best neighbor to forward it to. This routing table was built up by Babel, taking link quality and price (as computed in [section 1.2]({{ site.url }}/blog/althea-paper/#payments) above) into account, so the neighbor will be the one judged to have the best and cheapest route to the destination. Alice then appends a state update for her payment channel with Bob to the packet which pays him the rate that he is advertising for that destination. When Bob receives the packet and the payment, he forwards the packet on to his best neighbor, paying them the fee they charge to get a packet to that destination. Since Bob has set his fee to slightly higher that what his neighbor is charging to get to that destination, he will make a profit. This process continues until the packet reaches its destination.
+When Alice wishes to send a packet to a destination (Charlie) on the network, she consults her routing table to find the best neighbor to forward it to. This routing table was built up by Babel, taking link quality and price (as computed in [section 1.2](/blog/althea-paper/#payments) above) into account, so the neighbor will be the one judged to have the best and cheapest route to the destination. Alice then appends a state update for her payment channel with Bob to the packet which pays him the rate that he is advertising for that destination. When Bob receives the packet and the payment, he forwards the packet on to his best neighbor, paying them the fee they charge to get a packet to that destination. Since Bob has set his fee to slightly higher that what his neighbor is charging to get to that destination, he will make a profit. This process continues until the packet reaches its destination.
 
-![]({{ site.url }}/images/payment-flow.png)
+![](/images/payment-flow.png)
 
 In this way, Alice can send packets to any packet in the network, while transmitters along the way are compensated.
 
@@ -87,12 +87,12 @@ Let's say that Alice and Bob are neighbors. Bob learns that he can reach Doris w
 #### [3.1] Cost metric validation
 For Alice to catch Bob attempting a false advertisement attack, she must be able to check that the quality metric that Bob is reporting for a destination is truthful. Distance vector functions by summing the quality metric that nodes report about their neighbors.
 
-![]({{ site.url }}/images/honest-metric.png)
+![](/images/honest-metric.png)
 The distance vector cost to D seen by A is the summation of the link costs of all the links along the best route. Depending on the link quality metric used, it should be possible for this summation to be roughly equal to the overall link cost computed by A between it and D.
 
 This overall link cost can be computed in the same way that the individual link quality costs are computed, by analyzing percentage of succesfully acknowledged transmissions over a given time period.
 
-![]({{ site.url }}/images/dishonest-metric.png)
+![](/images/dishonest-metric.png)
 If someone on the route is advertising a lower (better) quality metric than they are actually able to provide, the distance vector cost seen by A will differ from the overall link cost.
 
 From these primitives, it should be possible to build an anti-cheating protocol. The simplest implementation would be to compute an honesty score for each neighbor, and let a human operator choose to disconnect from a neighbor with an especially bad score.

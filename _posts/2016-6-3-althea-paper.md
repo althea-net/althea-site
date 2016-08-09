@@ -1,10 +1,23 @@
 ---
 layout:     post
-title:      Althea in-progress white paper
+title:      Althea white paper
 summary:    "I'm working on the white paper for the full Althea system. This post is subject to frequent changes."
 ---
 
 Althea is a set of protocols for a decentralized point-to-point radio network providing connectivity to an area, where participants in the network are able to pay for connectivity, and receive payment for their contributions to the network, without a centralized ISP collecting subscriptions and owning equipment. It combines the commercial viability of a wireless ISP with the decentralized nature of a community mesh network. There are two main components- payments and routing.
+
+## [0] Overview
+Althea is meant to operate on the last mile, i.e. from an uplink (or transit provider) to the end user, and creates something like a "distributed ISP". The last mile is an inefficient market- many areas only have one ISP. The reason for this is that there is a very high barrier to entry. Currently, if you want to compete with your local ISP, you first get a subscription to an uplink, which will sell you a lot of bandwidth "in bulk". You then have to build out a local network which is large enough to service enough end users to pay for the operation of your ISP business. You have to hire a staff to administer the network along with businesspeople and lawyers to run the business, and its billing and contractual infrastructure.
+
+You then have to go out and find those end users and convince them to sign up to your service, usually as a monthly subscription. This marketing and advertising can be very expensive, and you will probably want to hire someone to administer the effort, along with marketing and advertising consultants to execute the campaign. This heavily favors firms that are able to make large investments, have name recognition, or have existing subscribers for a related service (like cable television or telephone services).
+
+Once the ISP is self-sustaining, it's time to take profit. End users are unlikely to switch providers, as the barriers to entry discussed above make it difficult for competitors to gain a foothold. Additionally, many end users have been locked into contracts with a provider, and will almost certainly not switch. As the ISP is in pure profit-taking mode, service and maintenance are considered cost centers to be eliminated. This results in much of the dissatisfaction felt by many end users towards their ISP.
+
+Althea is an attempt to create a much more fluid and competitive model, by removing the distinction between end user, ISP, and uplink. The goal is for any person to be able to set up an intermediary node that can route traffic for others, and receive payment for the service. Switching costs within the system are completely eliminated, as nodes switch between neighbors automatically according to a routing protocol which finds a route with the best combination of reliability, bandwidth, and low cost.
+
+Advertising and marketing costs for the new entrant are eliminated, as the only advertisements in this system are the automatic advertisements of price and route quality between nodes. Contract and billing costs are eliminated by payment channels. Payment channels are a technology from the blockchain world, which allow one to make micropayments with very low overhead. In a payment channel, each payment is a message under a few hundred bytes, sent directly between the sender and the receiver, with no contact of a third party bank or payment processor, and no need to wait for payments to clear. The use of a public blockchain (i.e. Bitcoin or Ethereum), means that participants are able to send and receive these payments without having to pay fees to a payment processor or procuring expensive money transmitter licenses.
+
+Our goal is to eliminate the costs associated with providing paid internet access by moving most of the functions of an ISP business into the underlying protocol. Our thesis is that this will result in a market with a much higher degree of competitiveness and efficiency. This will translate into lower prices to the end user for better access to the internet. Another benefit is that of a more equitable marketplace, where money paid for internet access goes directly to members of a local community instead of being captured by multinational corporations. This could play a small part in stimulating local economies and distributing wealth more fairly in the world.  
 
 ## [1] Routing
 Nodes route packets using an ad-hoc “mesh” routing protocol. This protocol must take price as well as link quality into account. We define several extensions to Babel, a popular and performant ad-hoc routing protocol.

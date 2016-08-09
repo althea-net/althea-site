@@ -11,7 +11,7 @@ First, let's look at the alternatives that I evaluated before settling on CORE.
 #### Simple container network
 The first thing I tried was just using some containers in a network, and then using the Linux tools `iptables` and/or `tc` to selectively drop and delay packets between pairs of nodes to simulate a lossy radio network. This would obviously not uncover complex real-world network dynamics, but no simulation will do this perfectly.
 
-The advantage of this approach is be simplicity (maybe). It's also a good way to improve my chops with the Linux network utilities.
+The advantage of this approach could be simplicity (maybe). It's also a good way to improve my chops with the Linux network utilities.
 
 One example of this is [mlc](https://github.com/axn/mlc), written by Axel Neuman, the creator of the BMX6 routing protocol. Unfortunately, this package requires a lot of manual setup, and hasn't been updated in a few years. It's still something I will get familiar with, but I may evaluate some other more polished tools first. This technique starts to lose its simplicity the further you try to take it.
 

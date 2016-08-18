@@ -11,13 +11,39 @@ Althea is meant to operate on the last mile, i.e. from an uplink (or transit pro
 
 You then have to go out and find those end users and convince them to sign up to your service, usually as a monthly subscription. This marketing and advertising can be very expensive, and you will probably want to hire someone to administer the effort, along with marketing and advertising consultants to execute the campaign. This heavily favors firms that are able to make large investments, have name recognition, or have existing subscribers for a related service (like cable television or telephone services).
 
-Once the ISP is self-sustaining, it's time to take profit. End users are unlikely to switch providers, as the barriers to entry discussed above make it difficult for competitors to gain a foothold. Additionally, many end users have been locked into contracts with a provider, and will almost certainly not switch. As the ISP is in pure profit-taking mode, service and maintenance are considered cost centers to be eliminated. This results in much of the dissatisfaction felt by many end users towards their ISP.
+Once the ISP is self-sustaining, it's time to take profit. End users are unlikely to switch providers, as the barriers to entry discussed above make it difficult for competitors to gain a foothold. Many end users are locked into contracts with a provider, and will almost certainly not switch. Service and maintenance are often considered cost centers to be eliminated. This results in much of the dissatisfaction felt by many end users towards their ISP.
 
 Althea is an attempt to create a much more fluid and competitive model, by removing the distinction between end user, ISP, and uplink. The goal is for any person to be able to set up an intermediary node that can route traffic for others, and receive payment for the service. Switching costs within the system are completely eliminated, as nodes switch between neighbors automatically according to a routing protocol which finds a route with the best combination of reliability, bandwidth, and low cost.
 
 Advertising and marketing costs for the new entrant are eliminated, as the only advertisements in this system are the automatic advertisements of price and route quality between nodes. Contract and billing costs are eliminated by payment channels. Payment channels are a technology from the blockchain world, which allow one to make micropayments with very low overhead. In a payment channel, each payment is a message under a few hundred bytes, sent directly between the sender and the receiver, with no contact of a third party bank or payment processor, and no need to wait for payments to clear. The use of a public blockchain (i.e. Bitcoin or Ethereum), means that participants are able to send and receive these payments without having to pay fees to a payment processor or procuring expensive money transmitter licenses.
 
-Our goal is to eliminate the costs associated with providing paid internet access by moving most of the functions of an ISP business into the underlying protocol. Our thesis is that this will result in a market with a much higher degree of competitiveness and efficiency. This will translate into lower prices to the end user for better access to the internet. Another benefit is that of a more equitable marketplace, where money paid for internet access goes directly to members of a local community instead of being captured by multinational corporations. This could play a small part in stimulating local economies and distributing wealth more fairly in the world.  
+Our goal is to reduce the costs associated with providing paid internet access (other than equipment and property costs), by moving most of the nonessential functions of an ISP business into the underlying protocol. Our thesis is that this will result in a market with a much higher degree of competitiveness and efficiency. This will translate into lower prices to the end user for better access to the internet. Another benefit is that of a more equitable marketplace, where money paid for internet access goes directly to members of a local community instead of being captured by multinational corporations. This could play a small part in stimulating local economies and distributing wealth more fairly in the world.
+
+## [1] Principal of operation
+There are 3 main parts of Althea: routing, payments, and gateway discovery.
+
+### [1.1] Routing
+Althea routing consists of an ad-hoc routing protocol which has been modified to propagate pricing information along with route quality information. This allows nodes to choose the best and lowest price routes to a given destination. Any distance vector or link state routing protocol could be used, but we will be modifying Babel because of its simplicity, extendability, and performance.
+
+What nodes end up with is a routing table for each of their neighbors. It contains the full list of IPs that neighbor can forward packets to, along with the quality of the connection and the price. From this information, the node chooses which neighbor to forward packets for a certain destination to, updates its own routing table, and propagates the information on.
+
+As packets are routed, each node is able to see how much it owes to and is owed by each of its neighbors, according to the routing table. How these payments are made is covered in 1.2.
+
+Unfortunately, most routing protocols including Babel are currently vulnerable to a pretty fundamental attack that will need to be addressed. It is impossible to stop a node from misreporting its quality to a destination. This hasn't been a problem with routing protocols so far because they are used on networks that are owned by one entity, or between entities that have trust or legal relationships. We address possible solutions in __.
+
+### [1.2] Payments
+As nodes route packets for each other, they start to owe each other money. In Althea, these balances are settled with very low overhead by something called payment channels.
+
+----Insert pymt chnl stuff----.
+
+### [1.3] Gateway discovery
+With the routing and payments described above, nodes can pay to have packets forwarded to destinations on the network. Other services can be built on top of this network. It's like the postal service. You attach an address and payment to a package and it gets delivered to its destination. If you order something that will be shipped to you, you have to pay for the item, plus the cot of sending it to you.
+
+One very important service is providing a gateway to the internet. Nodes acting as gateways advertise a price and a quality metric for a connection to the internet. This information needs to be advertised to the rest of the network so that other nodes can choose which gateway to use. When a node has chosen a gateway, it pays for the service with a payment channel in the same way it pays its neighbors.
+
+It's important to note that this involves the gateway paying to forward the response packets back to the end user. Like the mail-order example above, this means that an end user must send the gateway enough money to cover the price of the internet service, plus the price of sending the response packets back.
+
+We haven't written the protocol around this yet. There are several other systems in development, so we may use one of them. In any case, the concept can be tested with the protocols in 1.1 and 1.2.
 
 ## [1] Routing
 Nodes route packets using an ad-hoc “mesh” routing protocol. This protocol must take price as well as link quality into account. We define several extensions to Babel, a popular and performant ad-hoc routing protocol.

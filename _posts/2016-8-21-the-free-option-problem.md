@@ -1,3 +1,9 @@
+---
+layout:     post
+title:      The free option problem
+summary:    "The free option problem is an apparently inescapable problem in state channels. However, it can be mitigated. I'll cover 3 possible mitigations in this blog post. It's a variant of the fair exchange problem, which is a known concept in the field of cryptography as a whole."
+---
+
 The free option problem is an apparently inescapable problem in state channels. However, it can be mitigated. I'll cover 3 possible mitigations in this blog post. It's a variant of the fair exchange problem, which is a known concept in the field of cryptography as a whole. Let's review the fair exchange problem: 
 
 > Alice and Bob wish to exchange signatures. If Bob sends his first, Alice could simply refuse to send hers and walk away. If Alice sends first, the situation is reversed.

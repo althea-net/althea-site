@@ -19,8 +19,47 @@ Advertising and marketing costs for the new entrant are eliminated, as the only 
 
 Our goal is to reduce the costs associated with providing paid internet access (other than equipment and property costs), by moving most of the nonessential functions of an ISP business into the underlying protocol. Our thesis is that this will result in a market with a much higher degree of competitiveness and efficiency. This will translate into lower prices to the end user for better access to the internet. Another benefit is that of a more equitable marketplace, where money paid for internet access goes directly to members of a local community instead of being captured by multinational corporations. This could play a small part in stimulating local economies and distributing wealth more fairly in the world.
 
-## [1] Principal of operation
-There are 3 main parts of Althea: routing, payments, and gateway discovery.
+
+
+## [1] Principle of operation
+Althea's operation is inspired by the way ISPs work already. You could think of it as creating an ISP in every router. Internet service is generally provided on a "best effort" basis. You pay someone to forward your packets to any destination IP (upstream), and forward you packets from any source IP (downstream). They make their best effort to do this. You can verify this with a speed test, or more likely by whether you are satisfied with the service as a user. If you're not happy with their best effort, you are free to find another provider.
+
+As discussed in the overview, Althea is essentially an effort to increase the number of available internet providers, and to make finding another provider easier. Effectively, every router on the network becomes its own ISP. To do this, most of the functions of an ISP are automated, and take place within individual routers.
+
+
+
+## [1.1] Service negotiation
+Nodes must be able to arrange payment for internet service with a minimum of human intervention and a minimum of trust. This means that the human operator of a node must be able to input parameters about the desired quality of service goals and pricing limits, and the node's service negotiation software must be able to fulfill these goals as best it can. Another goal is for this service negotiation not to involve guarantees of service over a long period of time, or involve nodes making prior representations about their quality of service, both of which involve trust. The reason for these goals is that involving trust complicates a lot of things. The concept of trust directly implies some kind of consequence for bad actions, or at the very least a reputation system. Both of these things are very complicated to implement in software, and very expensive to implement in court.
+
+As much as possible, Althea's service negotiation framework operates without the possibility of bad actions. Let's see how this could work. 
+
+Alice is connected to an uplink which provides her upstream and downstream bandwidth to the internet. She wants to sell this bandwidth to her neighbors using Althea. Alice turns on her Althea node and it connects securely to her neighbors (there's more detail on how these connections are secured in [1.2]). One of her neighbors is Bob. Once a connection is established, Alice's node (node A) sends a message to Bob's node (node B), stating that it will provide an upstream and downstream connection at a certain price per megabyte (we may look at the possible advantages of node purchasing upstream and downstream connections separately in the future, but for now they will be bundled). Note that node A makes no representation about the maximum bandwidth, latency, or any other quality of service metrics.
+
+If the price per megabyte is within Bob's acceptable range, node B begins paying node A. At first, node B does not have any knowledge about the quality of node A's service. As node B uses the service, it is able to build this knowledge. If the QoS drops below what node B is willing to accept at the price per megabyte that it is paying, node B stops paying. If node B stops paying node A, it takes steps to throttle or cut off the connection.
+
+In the above example, it is taken for granted that node A is the one with connectivity, while node B is purchasing bandwidth. Further into the network, nodes making contact may both have connections to the internet, of varying quality. In this case the negotiation plays out similarly. Node B and node C connect, and send each other their price per megabyte. As above, each node makes a decision about whether they will accept the price at all. Then they begin to build up information about each others QoS.  
+
+## [1.2] Access control
+Althea is designed to work in large part over wireless 802.11 networks, and ethernet. Routers must be able to offer and deny their physical neighbors service, as well as possibly throttling or prioritizing traffic depending on a neighbor's level of payment. In the conventional networking world, ISPs provide and limit connectivity by plugging and unplugging cables in data centers or internet exchange points, and by running traffic shaping software on individual network interfaces. 
+
+In 802.11 networks, computers can connect to one another freely and send each other packets to be forwarded, unless the network has wireless security like WPA in place. Even with WPA, access to a given router is predicated on a shared secret (also known as a wifi password). In normal usage of WPA, access is provided on an all-or-nothing basis, and is available to anyone who has the password.
+
+Hardwired Ethernet connections have even less in the way of access control. Generally, if a computer is connected to the network, it is given the ability to forward packets as needed over any routers on the network.
+
+There is a great deal of tooling built up around filtering based on source and destination IPs. Most firewalls and traffic shaping software make this easy. However, it's not that useful for an incentivized mesh network. Consider this network:
+
+```
+A--B--C--D
+```
+
+Let's say that D has a connection to the internet. C is paying D for the connection, B is paying C, and A is paying B. A is the end user, accessing the internet. B and C are sending packets back and forth with source and destination addresses of A and D. Let's say that B stops paying C for access. C needs to stop forwarding packets from or to B, no matter their original source or eventual destination.
+
+One way to allow C to do this is with tunnels. A tunnel is when one packet is wrapped inside of another packet in place of a data payload. If nodes establish tunnels with all of their neighbors, and only allow forwarding of packets over these tunneled connections, it gives them the ability to control connections to particular neighbors. In C's case, the tunnel with B can be throttled or cut off until B pays enough.
+
+Another thing provided by a lot of tunneling software is cryptographic authentication. This is critical as well. Without authentication, another node could come within range of C, spoof B's IP address and claim to be B, effectively stealing the bandwidth that B paid for. In an authenticated tunnel, every packet is cryptographically signed by B, making this attack impossible.
+
+The advantage of tunneling is that it is a widely implemented, mature technology. The disadvantage is that it adds some overhead. Since each packet must be wrapped in another packet, a tunnel will add 20-60 bytes per packet (the maximum size packet on most networks is 1500 bytes). Also, it may result in the packet being copied more times in the router's memory, which could also slow down forwarding.
+
 
 ### [1.1] Routing
 Althea routing consists of an ad-hoc routing protocol which has been modified to propagate pricing information along with route quality information. This allows nodes to choose the best and lowest price routes to a given destination. Any distance vector or link state routing protocol could be used, but we will be modifying Babel because of its simplicity, extendability, and performance.

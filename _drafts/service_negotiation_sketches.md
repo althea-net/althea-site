@@ -92,3 +92,44 @@ Lets say that E joins the network. E connects to B and C, and sets its payment l
       /  \
 A----B----C----D
      5   10   15
+
+
+
+Send prioritization is when Alice pays her neighbors to prioritize packets that are received from another node and are destined to be routed through Alice. To be clear, no distinction is made between packets that are destined to a Alice IP address, and packets that have been chosen by the routing protocol to be routed onwards through Alice.
+
+Receive prioritization is when Alice pays her neighbors to prioritize packets that are received from Alice. No distinction is made between packets that Alice originated and packets that she is passing on from another node.
+
+For obvious reasons, receive prioritization is easier to implement. It could look like this:
+
+Alice is paying Bob 5 for receive prioritization. This is higher than what any of Bob's neighbors are paying, so when Bob is overloaded, he drops other node's packets to make way for Alice's packets. If a packet comes in from Alice it is placed on a higher priority queue than other neighbors.
+
+To implement send prioritization, we must find out from the routing protocol where a packet should be sent and prioritize it accordingly. It could look like this:
+
+Alice is paying Bob 5 for send prioritization. When a packet comes in, the routing table is consulted to find out where to send it. Packets that are to be routed through Alice are placed on a higher priority queue than other packets.
+
+A good way to implement this is to create a queue for every send/receive pair of neighbors. For instance, if B has neighbors A, C, and D, it will have queues:
+
+A->C
+A->D
+C->D
+C->A
+D->C
+D->A
+
+Let's say A is paying 5, C is paying 3, and D is paying 2
+
+A->C: 5+3= 8
+A->D: 5+2= 7
+C->D: 3+2= 5
+C->A: 3+5= 8
+D->C: 2+3= 5
+D->A: 2+5= 7
+
+Let's sort:
+
+A->C: 5+3= 8
+C->A: 3+5= 8
+A->D: 5+2= 7
+D->A: 2+5= 7
+C->D: 3+2= 5
+D->C: 2+3= 5

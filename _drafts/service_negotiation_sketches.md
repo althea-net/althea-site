@@ -38,3 +38,57 @@ More fine-grained control can be added in by getting QoS information for particu
 
 On the downstream side, a potential attack would be for the upstream node to send a lot of junk packets to a node downstream, and then receive payment for the traffic. If the packets are addressed to the downstream node, this attack is trivially preventable. Packets arriving at this node can be dropped, and the connection can be cut off for blatant spamming.   
 
+If a node receives a lot of packets that it must drop, it should start taking steps against the node that sent them. One reason for a node to drop packets is if they are addressed to it, but it did not request the packets and does not want them. This is known as spam. Another reason to drop packets is if the node is not able to route them to their destination.
+
+Another situation is if the node is simply not a good choice to route the packets. Imagine this scenario: 
+
+A-B-C-D 
+  \ /
+   E
+   |
+   F
+
+D has an uplink, B is paying C for upstream and downstream. Ideally, B makes this money back because A is paying B. So in a good scenario, C sends B a lot of traffic which B forwards to A. A pays B and B pays C, as well as making a profit. But let's say that B and C are also connected to E, who is connected to F. B pays C more than E for receiving packets. So, although the more direct route to F would be sending the packets directly through E, C chooses to send the packets to B first. However, B is not going to be forwarding packets to E at all unless E is paying B more than B is paying C (otherwise B would not be making any money). So, with an optimal negotiation system, it is in E's interest to pay C this money instead.
+
+--- OPTION 1: 
+
+Bargaining on each node is directed by some simple parameters input by humans- a maximum price and a minimum profit percentage. The maximum price is mostly relevant to nodes that are acting as consumers. It corresponds to the maximum price paid for bandwidth to be used by the node itself- traffic with that node as the source or the destination. The minimum profit is relevant to nodes that are mostly transmitting traffic for others. For a given price, the percentage of profit is calculated by comparing that price to a weighted average of prices paid for access to the internet in the past X minutes.
+
+A node will not pay a price above the set maximum, and it will not allow other nodes to pay it prices with a profit percentage below the minimum. These numbers are input by the humans operating the node. It may be possible to invent an automated negotiation system where nodes bargain among themselves to obtain outcomes that are acceptable to their operators without guidance, but we won't go into that here.
+
+Alice enters these numbers into her node:
+
+A:
+  maximum price: $5 per kb
+  minimum profit: 10%
+
+
+Bob enters these numbers:
+
+B:
+  maximum price: $3 per kb
+  minimum profit: 15%
+  
+
+A and B connect to one another. Each one calculates a minimum asking price which is derived from the minimum profit percentage and the average of prices paid to it during the last X minutes. They exchange their minimum asking price and maximum paying price.
+
+--- OPTION 2:
+
+A and B connect to one another. They tell each other what they are willing to pay for access. Based on this, they prioritize each other's traffic. For instance, if Alice is connected to Bob and Charlie, and Charlie is paying her more, Alice may prioritize Charlie's traffic over Bob's traffic. Let's look at the network:
+
+A---B---C---D
+
+A has an uplink. We want to arrive at an equilibrium where A is not paying peers for prioritization, and payment level increases as we move towards D at the edge of the network. 
+
+A----B----C----D
+   <-5 <-10 <-15
+
+In this scenario, D pays "retail" prices, and A, B, and C each earn 5 for their efforts in maintaining the network.
+
+Lets say that E joins the network. E connects to B and C, and sets its payment level to 10. When sending traffic through C, it has a hard time competing with D's payment of 15, and so if the network is saturated, it will see dropped packets. This will cause the link to look worse to the routing protocol, and will cause packets to be routed through B instead. Packets sent and received through B will receive a priority equal to the packets from C (including packets originally to and from D)  
+     
+       10
+       E
+      /  \
+A----B----C----D
+     5   10   15

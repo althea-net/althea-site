@@ -116,20 +116,58 @@ C->A
 D->C
 D->A
 
-Let's say A is paying 5, C is paying 3, and D is paying 2
+Let's say 
+A is paying receive: 5, send: 5,
+C is paying receive: 3, send: 4, and
+D is paying receive: 2, send: 1
 
 A->C: 5+3= 8
 A->D: 5+2= 7
-C->D: 3+2= 5
-C->A: 3+5= 8
-D->C: 2+3= 5
-D->A: 2+5= 7
+C->D: 4+2= 6
+C->A: 4+5= 9
+D->C: 1+3= 4
+D->A: 1+5= 6
 
 Let's sort:
 
-A->C: 5+3= 8
-C->A: 3+5= 8
-A->D: 5+2= 7
-D->A: 2+5= 7
-C->D: 3+2= 5
-D->C: 2+3= 5
+C->A: 9
+A->C: 8
+A->D: 7
+C->D: 6
+D->A: 6
+D->C: 4
+
+Now each pair of neighbors has a separate queue with a prioritization relative to the other queues. There are many different traffic shaping strategies that we won't cover here, which can be used to actually prioritize the traffic.  
+
+Use of the network can be metered by amount of data or by duration of use. 
+
+In existing networks, the benefit of metering by data is that it makes it easy to use a block of data from one transaction a little bit at a time. When you use a cell phone with a data cap, you can use it all month with a smaller amount of data if you use it intermittently. A time-based contract to get a 5mbs connection all month would cost a lot more, which would be a waste of money if it you only use it intermittently. Also, it's a natural way to allow people to pay for differing levels of reception across a network, since less data is used when reception is bad.
+
+The benefit of metering by time in traditional networks is that it's simple to measure. You just connect everyone, collect monthly payments, and make sure the network is working OK.
+
+A disadvantage of metering by data in Althea is that it creates an opportunity for nodes to cheat each other in a way that is hard to stop. Let's say that Bob is buying data from Alice and selling it to Charlie, who then sells it on. Alice can try to cheat Bob by sending bogus traffic that is hard to tell apart from good traffic. If Bob does a speedtest on traffic that he is sending through Alice, it won't show any evidence of the bogus traffic that Alice is sending him. He is selling data to Charlie and then on to some unkown destination, and there's no way to know how much of it anyone actually wants. Meanwhile, Bob's data (and money) is being used up more quickly.
+
+Metering by time, this is not a problem. Alice has no incentive to send bogus traffic to Bob. No matter how much bogus data she sends, Bob's time (and money) won't be used up more quickly.
+
+In metering by time, a limiting factor is transaction cost. If it is expensive and involved to negotiate a contract and pay for it, contracts will have to have longer durations. One effect of this is that is that it's not worth it to arrange contracts with nodes that are not a good source of data all the time.
+
+Lowering the cost of negotiation and transaction lessens this effect. Althea uses payment channels, which makes the cost of transaction very low. Also there is no negotiation, since fees pay for prioritization instead of all-or-nothing access. Nodes pay in very small increments, and can quickly stop payment if a connection to a certain neighbor gets spotty. 
+
+
+
+
+
+
+Tiny, granular payments
+
+
+Metering by data looks like this:
+
+Alice sends Bob a payment packet to pay for prioritization of 1 mb of data. Bob starts prioritizing Alice's traffic relative to the rate she is paying. When this allotment is used up, Alice sends another payment packet, or Bob stops prioritizing her traffic.
+
+Metering by time looks like this:
+
+Alice sends Bob a payment packet to pay for prioritization of 1 second of access. Bob starts prioritizing Alice's traffic relative to the rate she is paying. When the second is over, Alice sends another payment packet, or Bob stops prioritizing her traffic.
+
+
+

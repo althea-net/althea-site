@@ -26,15 +26,20 @@ We need a system of service negotiation that will result in nodes closer to the 
 
 A node builds up information about the QoS of all the nodes around it. This is gathered by using some kind of trusted speedtesting server out on the internet to test each peer. It would probably be good to hide the speedtesting activity or integrate it into normal use, but we won't cover that here. 
 
+## Routing protocol speed tests
+
 On the upstream side, the routing protocol is what decides where a packet for a certain destination gets sent. Routing protocols are complicated and difficult to secure. The same goes for centralized SDN routing. Althea needs to stop attacks on vulnerabilities in routing protocols. A simple attack on distance-vector routing protocols is if a node claims to have much better connectivity than it actually does. This causes other nodes to route more traffic through it, increasing the money earned. Most routing protocols have absolutely no defense against inaccurate route quality metrics. 
 
 The distance vector routing protocol that routes traffic on the highest level of the internet is called BGP. It defends against this type of attack by having intelligent human operators who spend their days watching it. Still, a lot of attacks (and mistakes) happen. http://www.bgpmon.net/blog/
 
 The speedtesting mentioned earlier gives us monitoring capability. We need to allow whichever routing protocol is in use to do the complicated work of routing packets to destinations far away while still ostracizing nodes who are making themselves look better than they are. 
 
-One way of doing this is for nodes to keep a table of relative node quality or priority. For any given route, the node that does best on a speed test will be chosen. The simplest way to do this is to have a global QoS ranking of all  neighbors, and if the routing table has a route that is advertised by more than one neighbor, to choose the neighbor that does best on the global ranking.
+One way of doing this is for nodes to keep a table of relative neighbor quality or priority. For any given route, if more than one neighbor matches the route in the routing table, the neighbor that does best on a speed test will be chosen. The simplest way to do this is to have a global QoS ranking of all  neighbors, and if the routing table has a route that is advertised by more than one neighbor, to choose the neighbor that does best on the global ranking.
 
 More fine-grained control can be added in by getting QoS information for particular IPs, subnets, or ranges of IPs. A simple example is if a node knows that it will be exchanging a lot of data with some IP, it could run a speedtest cooperatively with a computer at that IP. Then, when choosing a which neighbor to route packets going to that IP through, it could favor the node that does best on this specialized speedtest instead of the node that does best on the generalized global speedtest. 
+
+
+## Cutting off spam recursively backwards idea
 
 On the downstream side, a potential attack would be for the upstream node to send a lot of junk packets to a node downstream, and then receive payment for the traffic. If the packets are addressed to the downstream node, this attack is trivially preventable. Packets arriving at this node can be dropped, and the connection can be cut off for blatant spamming.   
 
@@ -42,11 +47,12 @@ If a node receives a lot of packets that it must drop, it should start taking st
 
 Another situation is if the node is simply not a good choice to route the packets. Imagine this scenario: 
 
-A-B-C-D 
-  \ /
-   E
-   |
-   F
+A - B - C - D 
+ \     /
+  \   /  
+    E
+    |
+    F
 
 D has an uplink, B is paying C for upstream and downstream. Ideally, B makes this money back because A is paying B. So in a good scenario, C sends B a lot of traffic which B forwards to A. A pays B and B pays C, as well as making a profit. But let's say that B and C are also connected to E, who is connected to F. B pays C more than E for receiving packets. So, although the more direct route to F would be sending the packets directly through E, C chooses to send the packets to B first. However, B is not going to be forwarding packets to E at all unless E is paying B more than B is paying C (otherwise B would not be making any money). So, with an optimal negotiation system, it is in E's interest to pay C this money instead.
 
@@ -71,6 +77,8 @@ B:
   
 
 A and B connect to one another. Each one calculates a minimum asking price which is derived from the minimum profit percentage and the average of prices paid to it during the last X minutes. They exchange their minimum asking price and maximum paying price.
+
+
 
 --- OPTION 2:
 
@@ -151,23 +159,59 @@ Metering by time, this is not a problem. Alice has no incentive to send bogus tr
 
 In metering by time, a limiting factor is transaction cost. If it is expensive and involved to negotiate a contract and pay for it, contracts will have to have longer durations. One effect of this is that is that it's not worth it to arrange contracts with nodes that are not a good source of data all the time.
 
-Lowering the cost of negotiation and transaction lessens this effect. Althea uses payment channels, which makes the cost of transaction very low. Also there is no negotiation, since fees pay for prioritization instead of all-or-nothing access. Nodes pay in very small increments, and can quickly stop payment if a connection to a certain neighbor gets spotty. 
+Lowering the cost of negotiation and transaction lessens this effect. Althea uses payment channels, which makes the cost of transaction very low. Also there is no negotiation, since fees pay for prioritization instead of all-or-nothing access. Nodes pay in very small increments, and can quickly stop payment if a connection to a certain neighbor gets spotty.
+
+# Unused capacity
+Notice that prioritization is usually only needed if networking equipment is near its capacity. If a network has more capacity than it needs, then there won't be much of a benefit from paying for prioritization. Equipment operators will probably make more money if they artificially reduce their capacity to the point where people paying nothing, or very little for prioritization have bad service and are motivated to pay.
+
+This sounds mean- greedy equipment operators crippling their own equipment to charge more. It doesn't have to work this way. Equipment operated as a community resource could be free until quality started to degrade and then prioritization payments would serve as a way to raise money to upgrade the equipment.
+
+     C - B                 
+    /   / \
+   F   D   A - internet
+    \     /
+     G - E
+
+
+// Let's say that Alice is sharing her internet connection with Bob and Elizabeth. Bob is sharing the connection onwards to Charlie and Doris. Charlie and Doris are both sharing with Franklin. Franklin also has a connection to Elizabeth, but it is very weak. To make the model simpler, let's assume that nodes are paying the same for send and receive prioritization.
+
+A's connection and/or equipment is at it's limits. Packets are getting dropped. None of A's queues are prioritized, so they are all getting dropped equally. 
+
+F, an end user, notices this and decides to boost his connectivity by paying for send and receive prioritzation. F starts paying 1 coin per second for send and receive prioritization to C, D, and G. 
 
 
 
 
 
+C - B
+ \   \
+  D   A - internet
+   \ /
+    E - F
 
-Tiny, granular payments
+We'll start from a place where nobody is paying anybody else, and see how payments start kicking in once the network becomes congested.
+
+A's connection and/or equipment is at it's limits. Packets are getting dropped.
+
+None of A's queues are prioritized, so E and C's packets are getting dropped at equal rates.
+
+D, an end user, decides to do something about this and starts paying E and C 5 coins per second for prioritization. 
+
+E does not change any of her behavior.
+
+C starts paying B 4 coins per second. It is in C's interest to "pay it forward" because C is now making a profit of 1 coin per second. If C does not pay B for prioritization, D might find a better route, resulting in C not getting any profit.
+
+B starts paying A 3 coins per second for the same reason. 
+
+Now A starts prioritizing B's traffic over E's. F's traffic starts getting dropped even more than before. Now F decides to pay E as well.
+
+C starts paying B 4 coins per second and B starts paying A 3 coins per second.
 
 
-Metering by data looks like this:
-
-Alice sends Bob a payment packet to pay for prioritization of 1 mb of data. Bob starts prioritizing Alice's traffic relative to the rate she is paying. When this allotment is used up, Alice sends another payment packet, or Bob stops prioritizing her traffic.
-
-Metering by time looks like this:
-
-Alice sends Bob a payment packet to pay for prioritization of 1 second of access. Bob starts prioritizing Alice's traffic relative to the rate she is paying. When the second is over, Alice sends another payment packet, or Bob stops prioritizing her traffic.
+If a node is receiving payments for prioritization from other nodes, it is in the nodes interest to keep the quality of its connectivity high and pay upstream nodes for prioritization if neccesary. For this reason, it is in an operator's interest to have some software which automatically pays for prioritization. A rudimentary version of this would be for the node to pay out a certain percentage of incoming prioritization payments to nodes upstream. If we take for granted that the routing protocol is not compromised, we can assume that nodes will have to compete with each other to provide the best service if they wish to keep receiving payments.  
 
 
+
+
+This is similar to the way money flows from end-users to ISPs and between ISPs, except that instead of being human-mediated and having only a few levels of service, it is software-mediated, with a continuous choice of service levels.  
 

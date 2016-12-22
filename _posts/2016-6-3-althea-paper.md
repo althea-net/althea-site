@@ -4,6 +4,8 @@ title:      Althea white paper
 summary:    "I'm working on the white paper for the full Althea system. This post is subject to frequent changes."
 ---
 
+**Note:** I've significantly changed my strategy since this was written, and you should read the [development update](/blog/development-update/).
+
 Althea is a set of protocols for a decentralized point-to-point radio network providing connectivity to an area, where participants in the network are able to pay for connectivity, and receive payment for their contributions to the network, without a centralized ISP collecting subscriptions and owning equipment. It combines the commercial viability of a wireless ISP with the decentralized nature of a community mesh network. There are two main components- payments and routing.
 
 ## [0] Overview

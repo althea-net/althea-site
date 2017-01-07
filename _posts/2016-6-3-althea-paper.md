@@ -105,9 +105,13 @@ For Alice to catch Bob attempting a false advertisement attack, she must be able
 ![](/images/honest-metric.png)
 The distance vector cost to D seen by A is the summation of the link costs of all the links along the best route. Depending on the link quality metric used, it should be possible for this summation to be roughly equal to the overall link cost computed by A between it and D.
 
-This overall link cost can be computed in the same way that the individual link quality costs are computed, by analyzing percentage of succesfully acknowledged transmissions over a given time period.
+This overall link cost can be computed in the same way that the individual link quality costs are computed, by analyzing percentage of successfully acknowledged transmissions over a given time period.
 
 ![](/images/dishonest-metric.png)
 If someone on the route is advertising a lower (better) quality metric than they are actually able to provide, the distance vector cost seen by A will differ from the overall link cost.
 
+Once A knows that B is giving it bad information, A can complain to B, or take steps to cut the connection. If B is honest, B will want to do the same kind of check on the neighbor that gave it the bad route. In this way, cheating nodes could be eliminated.
+
 From these primitives, it should be possible to build an anti-cheating protocol. The simplest implementation would be to compute an honesty score for each neighbor, and let a human operator choose to disconnect from a neighbor with an especially bad score.
+
+

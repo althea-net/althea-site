@@ -5,6 +5,7 @@ author:      Jehan Tremback
 description: "Incentivized mesh networks."
 url:         http://altheamesh.com
 date_format: "%b %-d, %Y"
+highlighter: rouge
 
 # Google services
 google_analytics:

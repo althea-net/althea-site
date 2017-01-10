@@ -110,7 +110,7 @@ This overall link cost can be computed in the same way that the individual link 
 ![](/images/dishonest-metric.png)
 If someone on the route is advertising a lower (better) quality metric than they are actually able to provide, the distance vector cost seen by A will differ from the overall link cost.
 
-Once A knows that B is giving it bad information, A can complain to B, or take steps to cut the connection. If B is honest, B will want to do the same kind of check on the neighbor that gave it the bad route. In this way, cheating nodes could be eliminated.
+Once A knows that B is giving it bad information, A can complain to B, or take steps to cut the connection. If B is honest, B will want to do the same kind of check on the neighbor that gave it the bad route. This chain of verification will be repeated until it reaches the node that is the source of the inaccurate quality metric. If this node does not correct the issue, its neighbor may cut it off.
 
 From these primitives, it should be possible to build an anti-cheating protocol. The simplest implementation would be to compute an honesty score for each neighbor, and let a human operator choose to disconnect from a neighbor with an especially bad score.
 

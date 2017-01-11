@@ -1,6 +1,7 @@
 ---
 title: "Dev Update 2: Shell Scripts"
 layout:     post
+summary: "I've been experimenting in CORE with some shell scripts to allow nodes to prioritize traffic to and from their peers."
 ---
 
 I'm now trying to build a piece of software that does a few things:
@@ -10,10 +11,10 @@ I'm now trying to build a piece of software that does a few things:
 - Prioritizes traffic from some neighbors more highly than others. This will ultimately be linked to payment, but for now I'll just pass it in manually.
 - Allows nodes to choose what proportion of their total bandwidth they will share/sell.
 
-I've been experimenting in [CORE]() with some shell scripts to make this stuff happen. I'm going to write the actual software in Go, but shell is great for prototyping. You can call other programs from within the language and shell's jankiness and disposable feel keeps you from getting too fixated on the minor details.
+I've been experimenting in [CORE](/blog/using-core-for-network-simulation/) with some shell scripts to make this stuff happen. I'm going to write the actual software in Go, but shell is great for prototyping. You can call other programs from within the language and shell's jankiness and disposable feel keeps you from getting too fixated on the minor details.
 
 ## Tunnels
-I'm using [fastd]() for tunnels because it is easy to use and has a lot of options for customization. It's in userspace, which means that each packet will be copied out of kernel memory and back in several times. This greatly limits bandwidth, so I'll switch to something more efficient like Wireguard at some point.
+I'm using [fastd](https://fastd.readthedocs.io/en/v18/) for tunnels because it is easy to use and has a lot of options for customization. It's in userspace, which means that each packet will be copied out of kernel memory and back in several times. This greatly limits bandwidth, so I'll switch to something more efficient like Wireguard at some point.
 
 Right now I'm using this shell script to set up each peer:
 
@@ -91,7 +92,7 @@ This sets up each node's private key and other fastd settings, including the `tu
 I also have to set up routes on each node manually. This will be done by the routing protocol, but for these tests I am doing it manually to eliminate any uncertainty.
 
 ## Firewall
-Nodes do not want to forward any packet that has not come over one of the authenticated tunnels, because this packet has not been paid for. This is actually pretty easy to set up with nftables, once you understand the syntax and how it operates.
+Nodes do not want to forward any packet that has not come over one of the authenticated tunnels, because this packet has not been paid for. This is actually pretty easy to set up with [nftables](https://wiki.nftables.org/wiki-nftables/index.php/Main_Page), once you understand the syntax and how it operates.
 
 ```shell
 # usage: addrules <peer_number> ...
@@ -138,7 +139,7 @@ table ip althea {
 ```
 
 ## Traffic Shaping
-Now it is time to prioritize traffic depending on how much nodes are paying. I'm using tc, which is a tool in linux for this purpose. Traffic shaping is a very subtle process and I don't fully understand all the ins and outs yet. Also, tc's syntax is frankly quite cumbersome. Tc lets you set up qdiscs- (short for queueing discipline). There are also filters which can put packets into different classes inside the qdisc depending on different criteria. The qdisc then enqueues packets into the different classes, and either dequeues them to the network or drops them to accomplish its traffic shaping goals.
+Now it is time to prioritize traffic depending on how much nodes are paying. I'm using [tc](http://www.lartc.org/manpages/tc.txt), which is a tool in linux for this purpose. Traffic shaping is a very subtle process and I don't fully understand all the ins and outs yet. Also, tc's syntax is frankly quite cumbersome. Tc lets you set up qdiscs- (short for queueing discipline). There are also filters which can put packets into different classes inside the qdisc depending on different criteria. The qdisc then enqueues packets into the different classes, and either dequeues them to the network or drops them to accomplish its traffic shaping goals.
 
 I'll start with a diagram to explain the shaping setup that I have made, because the tc scripts are hard to follow.
 

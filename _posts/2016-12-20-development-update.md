@@ -21,3 +21,5 @@ This is very simple, and will need to work together with a few other components 
 - Routing is still necessary, and it still needs to be secure. Babel, and most other routing protocols will allow nodes to cheat and direct more traffic towards themselves than they should have. There are some ideas in the direction of securing distance vector protocols such as [SEAD](http://www.netsec.ethz.ch/publications/papers/sead-journal.pdf). Another option is using centrally determined routes or SDN. It might be easier to monitor and prevent cheating with a centralized system.
 
 - Just because nodes can choose their desired level of prioritization and compete for service with the nodes around them, doesn't mean they know what prices to pay. The simplest option is to have the pricing manually controlled, but this will be too much of an annoyance for most people. An automatic pricing system is probably a necessity for wide adoption, but I am leaving it for later.
+
+[Discuss this post on Reddit](https://www.reddit.com/r/altheamesh/comments/5mh5ur/development_update/)

@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Reusable throughput tests
+title:      Route quality metric verification
 summary:    "Justin Kilpatrick, who is working on a similar project called Hocnet, came up with an interesting idea: reuse the results of a quality test along a route. As a simple example, let's say that the quality metric that is being used is percent packet loss. Alice is sending traffic to a Zack over the network. Zack keeps track of how many packets he receives over a certain time period, signs this, and sends it back. Now Alice can compare this information with her own statistics about how many packets she has sent out during the same time period to derive a percent packet loss metric."
 ---
 

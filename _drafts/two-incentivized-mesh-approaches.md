@@ -31,4 +31,4 @@ There's an open question about how to select upstream nodes to pay.
 
 An intermediary node could cheat in some circumstances. Let's say that there are 2 intermediary nodes in a neighborhood supplying internet to 4 end-user nodes. We start the scenario with both of them being paid equally by the end user nodes. Payment is per-second, not per-byte. If one of them starts advertising really good routes to the nodes in the neighborhood, the other one will not receive any downstream traffic to those nodes. At this point, there's no real reason for the nodes in the neighborhood to keep paying that node.
 
-This will harm the end-user nodes by granting the cheating node an undeserved monopoly. It is in their interest to make sure that the routes advertised by the intermediary nodes about them are accurate.
+This will harm the end-user nodes by granting the cheating node an undeserved monopoly. It is in their interest to make sure that the routes advertised by the intermediary nodes to them are accurate. Upstream nodes also want these routes to be accurate. 

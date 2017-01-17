@@ -214,4 +214,4 @@ I run this for every child class of the drr qdisc that I want to create. This wi
 
 Using this setup, I am able to prioritize traffic coming from and going to a node's different peers. The next step, which I am working on now, is to automate this all. I'm writing that code in Go.
 
-[Discuss this post on Reddit](https://www.reddit.com/r/altheamesh/comments/5nehvj/dev_update_2_shell_scripts/)
+[Discuss this post on Reddit](https://www.reddit.com/r/incentivizedmesh/comments/5oeo1v/tunnelfirewalltraffic_shaping_setup_to_securely/)

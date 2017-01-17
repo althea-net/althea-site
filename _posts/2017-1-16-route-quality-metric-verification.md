@@ -1,8 +1,10 @@
 ---
 layout:     post
 title:      Route quality metric verification
-summary:    "Justin Kilpatrick, who is working on a similar project called Hocnet, came up with an interesting idea: reuse the results of a quality test along a route. As a simple example, let's say that the quality metric that is being used is percent packet loss. Alice is sending traffic to a Zack over the network. Zack keeps track of how many packets he receives over a certain time period, signs this, and sends it back. Now Alice can compare this information with her own statistics about how many packets she has sent out during the same time period to derive a percent packet loss metric."
+summary:    "Any kind of incentivized mesh scheme needs a secure routing protocol. Without this, any node can claim anything it wants about the quality of routes that it has to a destination. Depending on how the payments work, there are a variety of different ways that this kind of routing protocol cheating can be financially lucrative. There needs to be a good way to verify that what nodes claim about the quality and quantity of their connections to other nodes is correct."
 ---
+
+Any kind of incentivized mesh scheme needs a secure routing protocol. Without this, any node can claim anything it wants about the quality of routes that it has to a destination. Depending on how the payments work, there are a variety of different ways that this kind of routing protocol cheating can be financially lucrative. There needs to be a good way to verify that what nodes claim about the quality and quantity of their connections to other nodes is correct.
 
 In the original design of Althea, in the [whitepaper](http://altheamesh.com/blog/althea-paper/), I call for verification of routes. That is, once a node has made a connection to another node that it cares about, it checks whether the route quality information propagated with the routing protocol is correct. This consists of the node doing some kind of route quality or throughput test with the destination node and seeing if it matches up to what was propagated.
 

@@ -26,16 +26,16 @@ Possible types of quality test:
 
 **Functionality:** Nodes find out how many packets are lost over links to their neighbors. When they get a route update message for a given destination, they multiply the total route packet loss by the packet loss of the link they received it on and forward it onwards.
 
-**Verification:** The product of the packet loss of every link in a route should equal the packet loss of the whole route. Destination sends a signed message with the number of packets received from a source during a certain time period. Nodes along the route can compare this with how many packets from that source they have forwarded to the destination during this time period to find the route's total packet loss. Babel and Batman IV use this type of metric.
+**Verification:** The product of the packet loss of every link in a route should equal the packet loss of the whole route. The destination sends a signed message with the number of packets received from a source during a certain time period. Nodes along the route can compare this with how many packets from that source they have forwarded to the destination during this time period to find the route's total packet loss. Babel and Batman IV use this type of metric.
 
 ### Throughput:
 
 **Functionality:** Nodes find the maximum throughput of links to their neighbors. When they get a route update message for a given destination, they set the total route throughput to equal the throughput of the link they received the message on, if the throughput of the link is lower.
 
-**Verification:** The lowest throughput link along the route should equal the maximum throughput of the route as a whole. Destination sends a signed message with the number of bytes received from a source during a certain time period. An important caveat here is that the route must be saturated to the maximum throughput to get an accurate estimate. This could waste bandwidth and also tip off nodes along the route that a quality test is happening. Batman V uses this type of metric.
+**Verification:** The lowest throughput link along the route should equal the maximum throughput of the route as a whole. The destination sends a signed message with the number of bytes received from a source during a certain time period. Nodes along the route can compare this to the number of bytes that they forwarded from that source. An important caveat here is that the route must be saturated to the maximum throughput to get an accurate estimate. This could waste bandwidth and also tip off nodes along the route that a quality test is happening. Batman V uses this type of metric.
 
 ### Latency:
 
 **Functionality:** Nodes measure the average latency of links to their neighbors. When they get a route update message for a given destination, they add the latency of the link they received it on to the total route latency before forwarding it onwards.
 
-**Verification:** The sum of the latencies of all the links on a route should equal the latency of the route as a whole. Destination sends a signed message with the hashes of various packets and their time of receipt. Nodes on the route compare this time of receipt with the time that they received each packet.
+**Verification:** The sum of the latencies of all the links on a route should equal the latency of the route as a whole. The destination sends a signed message with the hashes of various packets and their time of receipt. Nodes on the route compare this time of receipt with the time that they received each packet.

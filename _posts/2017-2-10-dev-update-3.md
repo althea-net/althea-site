@@ -1,7 +1,7 @@
 ---
 title: "Scrooge development: Running code"
 layout:     post
-summary: "I've been focusing my efforts on [Scrooge](https://github.com/incentivized-mesh-infrastructure/scrooge), a piece of software that will implement the tunnel-based traffic control scheme I've written about [here](/blog/dev-update-2/)."
+summary: "I've been focusing my efforts on Scrooge, a piece of software that will implement the tunnel-based traffic control scheme I've written about previously."
 ---
 
 I've been focusing my efforts on [Scrooge](https://github.com/incentivized-mesh-infrastructure/scrooge), a piece of software that will implement the tunnel-based traffic control scheme I've written about [here](/blog/dev-update-2/). To recap, I'm trying to build somethign that:

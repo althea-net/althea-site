@@ -78,6 +78,15 @@ where `m` is the metric, `p` is the price, and `n` is a constant multiplier.
 
 Aside: It was hard to choose whether to make this a route selection procedure, extending section 3.6, or a metric computation, extending section 3.5.2. We chose to make it a route selection procedure, as metrics computed by section 3.5.2 are propagated to a node’s neighbors. Since the price is already propagated by this extension, it seems like a bad idea to propagate it again as a factor in the route metric. There is a possibility that this decision will need to be revisited.
 
+### [1.3] Gateway discovery
+With the routing and payments described above, nodes can pay to have packets forwarded to destinations on the network. Other services can be built on top of this network. It's like the postal service. You attach an address and payment to a package and it gets delivered to its destination. If you order something that will be shipped to you, you have to pay for the item, plus the cot of sending it to you.
+
+One very important service is providing a gateway to the internet. Nodes acting as gateways advertise a price and a quality metric for a connection to the internet. This information needs to be advertised to the rest of the network so that other nodes can choose which gateway to use. When a node has chosen a gateway, it pays for the service with a payment channel in the same way it pays its neighbors.
+
+It's important to note that this involves the gateway paying to forward the response packets back to the end user. Like the mail-order example above, this means that an end user must send the gateway enough money to cover the price of the internet service, plus the price of sending the response packets back.
+
+We haven't written the protocol around this yet. There are several other systems in development, so we may use one of them. In any case, the concept can be tested with the protocols in 1.1 and 1.2.
+
 ## [2] Payments
 Each node on the network establishes payment channels with each of its neighbors. A payment channel is a method for two parties to exchange payments trustlessly by signing transactions that alter the balance of an escrow account held by a bank or blockchain (we may use the Ethereum blockchain for Althea).
 

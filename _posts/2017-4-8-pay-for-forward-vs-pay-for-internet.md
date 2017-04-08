@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Pay for forward v.s. pay for internet
-summary:    "The proportional hashlock gives us the ability to build a sort of higher level micropayment channel that sits on top of a multihop payment which is released incrementally."
+summary:    "We've considered two main mechanisms for an incentivized mesh network so far. Pay for forward is the mechanism laid out in Althea v1, and Hocnet. Pay for internet is something I've been working on as Althea v2 and it is also kind of how ISPs work now. This is a brief summary of both approaches."
 ---
 
 We've considered two main mechanisms for an incentivized mesh network so far. Pay for forward is the mechanism laid out in [Althea v1](http://altheamesh.com/blog/althea-paper/), and [Hocnet](https://www.reddit.com/r/hocnet/). Pay for internet is something I've been working on as Althea v2 and it is also kind of how ISPs work now. This is a brief summary of both approaches.

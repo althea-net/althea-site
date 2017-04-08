@@ -35,9 +35,9 @@ As much as possible, Althea's service negotiation framework operates without the
 
 Alice is connected to an uplink which provides her upstream and downstream bandwidth to the internet. She wants to sell this bandwidth to her neighbors using Althea. Alice turns on her Althea node and it connects securely to her neighbors (there's more detail on how these connections are secured in [1.2]). One of her neighbors is Bob. Once a connection is established, Alice's node (node A) sends a message to Bob's node (node B), stating that it will provide an upstream and downstream connection at a certain price per megabyte (we may look at the possible advantages of node purchasing upstream and downstream connections separately in the future, but for now they will be bundled). Note that node A makes no representation about the maximum bandwidth, latency, or any other quality of service metrics.
 
-If the price per megabyte is within Bob's acceptable range, node B begins paying node A. At first, node B does not have any knowledge about the quality of node A's service. As node B uses the service, it is able to build this knowledge. If the QoS drops below what node B is willing to accept at the price per megabyte that it is paying, node B stops paying. If node B stops paying node A, it takes steps to throttle or cut off the connection.
+If the price per megabyte is within Bob's acceptable range, node B begins paying node A. At first, node B does not have any knowledge about the quality of node A's service. As node B uses the service, it is able to build this knowledge. If the QoS drops below what node B is willing to accept at the price per megabyte that it is paying, node B stops paying. If node B stops paying node A, node A takes steps to throttle or cut off the connection.
 
-In the above example, it is taken for granted that node A is the one with connectivity, while node B is purchasing bandwidth. Further into the network, nodes making contact may both have connections to the internet, of varying quality. In this case the negotiation plays out similarly. Node B and node C connect, and send each other their price per megabyte. As above, each node makes a decision about whether they will accept the price at all. Then they begin to build up information about each others QoS.  
+In the above example, it is taken for granted that node A is the one with connectivity, while node B is purchasing bandwidth. Further into the network, nodes making contact may both have connections to the internet, of varying quality. In this case the negotiation plays out similarly. Node B and node C connect, and send each other their price per megabyte. As above, each node makes a decision about whether they will accept the price at all. Then they begin to build up information about each others QoS.
 
 ## [1.2] Access control
 Althea is designed to work in large part over wireless 802.11 networks, and ethernet. Routers must be able to offer and deny their physical neighbors service, as well as possibly throttling or prioritizing traffic depending on a neighbor's level of payment. In the conventional networking world, ISPs provide and limit connectivity by plugging and unplugging cables in data centers or internet exchange points, and by running traffic shaping software on individual network interfaces. 
@@ -62,18 +62,18 @@ The advantage of tunneling is that it is a widely implemented, mature technology
 
 
 ### [1.1] Routing
-Althea routing consists of an ad-hoc routing protocol which has been modified to propagate pricing information along with route quality information. This allows nodes to choose the best and lowest price routes to a given destination. Any distance vector or link state routing protocol could be used, but we will be modifying Babel because of its simplicity, extendability, and performance.
+Althea is built to work with an ad-hoc routing protocol which has been modified to propagate pricing information along with route quality information. This allows nodes to choose the best and lowest price routes to a given destination. Any distance vector or link state routing protocol could be used, but we will be modifying Babel because of its simplicity, extendability, and performance.
 
 What nodes end up with is a routing table for each of their neighbors. It contains the full list of IPs that neighbor can forward packets to, along with the quality of the connection and the price. From this information, the node chooses which neighbor to forward packets for a certain destination to, updates its own routing table, and propagates the information on.
 
 As packets are routed, each node is able to see how much it owes to and is owed by each of its neighbors, according to the routing table. How these payments are made is covered in 1.2.
 
-Unfortunately, most routing protocols including Babel are currently vulnerable to a pretty fundamental attack that will need to be addressed. It is impossible to stop a node from misreporting its quality to a destination. This hasn't been a problem with routing protocols so far because they are used on networks that are owned by one entity, or between entities that have trust or legal relationships. We address possible solutions in __.
+Unfortunately, most routing protocols including Babel are currently vulnerable to a pretty fundamental attack that will need to be addressed. It is impossible to stop a node from misreporting its quality to a destination. This hasn't been a problem with routing protocols so far because they are used on networks that are owned by one entity, or between entities that have trust or legal relationships.
 
 ### [1.2] Payments
-As nodes route packets for each other, they start to owe each other money. In Althea, these balances are settled with very low overhead by something called payment channels.
+Each node on the network establishes payment channels with each of its neighbors. A payment channel is a method for two parties to exchange payments trustlessly by signing transactions that alter the balance of an escrow account held by a bank or blockchain (we may use the Ethereum blockchain for Althea).
 
-----Insert pymt chnl stuff----.
+The important thing about a payment channel is that after the channel has been opened, and funds have been placed in escrow, individual payments can be made directly between the two parties without submitting anything to the bank or blockchain. This means that the entire payment can be completed in one packet. Most payment systems need to send another transmission to a bank or blockchain, and wait for it to be confirmed. This would be too much overhead for use with Althea, which is why payment channels are used instead.
 
 ### [1.3] Gateway discovery
 With the routing and payments described above, nodes can pay to have packets forwarded to destinations on the network. Other services can be built on top of this network. It's like the postal service. You attach an address and payment to a package and it gets delivered to its destination. If you order something that will be shipped to you, you have to pay for the item, plus the cot of sending it to you.
@@ -83,75 +83,6 @@ One very important service is providing a gateway to the internet. Nodes acting 
 It's important to note that this involves the gateway paying to forward the response packets back to the end user. Like the mail-order example above, this means that an end user must send the gateway enough money to cover the price of the internet service, plus the price of sending the response packets back.
 
 We haven't written the protocol around this yet. There are several other systems in development, so we may use one of them. In any case, the concept can be tested with the protocols in 1.1 and 1.2.
-
-## [1] Routing
-Nodes route packets using an ad-hoc “mesh” routing protocol. This protocol must take price as well as link quality into account. We define several extensions to Babel, a popular and performant ad-hoc routing protocol.
-
-Here’s an excerpt to give you an idea of how Babel works:
-
->2.1. Costs, Metrics, and Neighbourship
->
->As many routing algorithms, Babel computes costs of links between any two neighbouring nodes, abstract values attached to the edges between two nodes. We write C(A, B) for the cost of the edge from node A to node B.
->
->Given a route between any two nodes, the metric of the route is the sum of the costs of all the edges along the route.  The goal of the  routing algorithm is to compute, for every source S, the tree of the routes of lowest metric to S.
->
->Costs and metrics need not be integers.  In general, they can be values in any algebra that satisfies two fairly general conditions (Section 3.5.2).
->
->A Babel node periodically broadcasts Hello messages to all of its neighbours; it also periodically sends an IHU ("I Heard You") message to every neighbour from which it has recently heard a Hello.  From the information derived from Hello and IHU messages received from its neighbour B, a node A computes the cost C(A, B) of the link from A to B.
-
-Babel provides a mechanism for extensibility, which is the basis for the modifications defined in this paper.
-
-### [1.2] Babel extension: Price-aware routing
-
-Babel is a good fit for routing based on payments because of its method of operation, known as "distance vector". 
-
-![](/images/pir1.png)
-
-Distance vector routing works by assigning a quality metric to the links between nodes, where higher is worse. Nodes then gossip information about which nodes they can reach at which quality. From this information, each node is able to build up a routing table containing the all destinations in the network, along with their composite quality metric, and the neighbor to forward packets for a destination.
-
-![](/images/pir2.png)
-
-This extension allows a Babel router to attach information about monetary price to the routes that it maintains. The router also propagates this information to its neighbors, who use it to determine their own prices. The price is taken into account for metric computation and route selection. It is also used by a payment protocol external to Babel (defined below in “Payments”) to pay neighbors to forward data.
-
-#### [1.2.1] Changes to data structures
-
-A router implementing price-aware routing has one additional field in each route table entry:
-
-- A price field, denoting how much the router charges to forward packets along this route. 
-
-#### [1.2.3] Receiving updates
-
-When a node receives an Update TLV, it creates or updates a routing table entry according to Babel, section 3.5.4.  A node that performs price-aware routing extends that procedure by setting the routing table entry price field to `p'`, where: 
-
-    p'=p+l
-
-Let `p` be the price attached to the received Update TLV. Let `l` be the price per kilobyte charged by the Babel router to forward packets along the update’s route. Determination of `l` is implementation-dependent, but for a simple implementation, a single `l` can be used for all routes.
-
-#### [1.2.4] Route selection
-
-Route selection is discussed in Babel, section 3.6. The exact procedure is left as an implementation detail but a simple example is:
-
->routes with a small metric should be preferred over routes with a   large metric;
-
-Similarly, in price-aware routing, routes with a low price should be preferred over routes with a high price. These two criteria both need to factor into the selection. For example, a combined metric m` could be defined as:
-
-    m'=m+(p*n)
-
-where `m` is the metric, `p` is the price, and `n` is a constant multiplier.
-
-Aside: It was hard to choose whether to make this a route selection procedure, extending section 3.6, or a metric computation, extending section 3.5.2. We chose to make it a route selection procedure, as metrics computed by section 3.5.2 are propagated to a node’s neighbors. Since the price is already propagated by this extension, it seems like a bad idea to propagate it again as a factor in the route metric. There is a possibility that this decision will need to be revisited.
-
-## [2] Payments
-Each node on the network establishes payment channels with each of its neighbors. A payment channel is a method for two parties to exchange payments trustlessly by signing transactions that alter the balance of an escrow account held by a bank or blockchain (we may use the Ethereum blockchain for Althea).
-
-The important thing about a payment channel is that after the channel has been opened, and funds have been placed in escrow, individual payments can be made directly between the two parties without submitting anything to the bank or blockchain. This means that the entire payment can be completed in one packet. Most payment systems need to send another transmission to a bank or blockchain, and wait for it to be confirmed. This would be too much overhead for use with Althea, which is why payment channels are used instead.
-
-When Alice wishes to send a packet to a destination (Charlie) on the network, she consults her routing table to find the best neighbor to forward it to. This routing table was built up by Babel, taking link quality and price (as computed in [section 1.2](/blog/althea-paper/#payments) above) into account, so the neighbor will be the one judged to have the best and cheapest route to the destination. Alice then appends a state update for her payment channel with Bob to the packet which pays him the rate that he is advertising for that destination. When Bob receives the packet and the payment, he forwards the packet on to his best neighbor, paying them the fee they charge to get a packet to that destination. Since Bob has set his fee to slightly higher that what his neighbor is charging to get to that destination, he will make a profit. This process continues until the packet reaches its destination.
-
-![](/images/payment-flow.png)
-
-In this way, Alice can send packets to any packet in the network, while transmitters along the way are compensated.
-
 
 ## [3] Vulnerabilities
 As you may have noticed, this system is vulnerable. Babel makes no provision for hostile nodes. Under this protocol, any node can advertise a cost of 0 to every destination on the network, and have all traffic from its neighbors routed through it, and receive payment (while dropping the packets, or offering worse than advertised performance and reliability). There are also other, more subtle exploits.

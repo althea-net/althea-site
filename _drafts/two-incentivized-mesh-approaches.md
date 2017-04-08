@@ -22,9 +22,9 @@ As you can see, the overhead of checking downstream routes is far larger than th
 
 What if we flip the perspective, and just have nodes pay each other for internet access? In this model, nodes that are further away from the internet pay nodes that are closer to it both for upstream and downstream traffic. This is generally how internet service works now.
 
-Now, nodes have no incentive to claim to have routes to nodes they are not connected to (or nodes that are not paying them for downstream traffic). If they do this, they will be receiving traffic that they will not be paid to forward. Since they are being paid by the nodes they send packets to, their incentive is to send out traffic to downstream nodes proportional to how much each downstream node is paying them.
+Now, upstream nodes have no incentive to claim to have routes to nodes they are not connected to (or nodes that are not paying them for downstream traffic). If they do this, they will be receiving traffic that they will not be paid to forward. Since they are being paid by the nodes they send packets to, their incentive is to send out traffic to downstream nodes proportional to how much each downstream node is paying them.
 
-Each node needs to verify that its upstream routes are good. This verification can consist of a speedtest to various servers on the internet, testing for various things, such as throughput, latency, etc. If a given upstream node does not have a great connection, you can stop using them.
+Each node still needs to verify that its upstream routes are good. This verification can consist of a speedtest to various servers on the internet, testing for various things, such as throughput, latency, etc. If a given upstream node does not have a great connection, you can stop using them.
 
 Let's say that there are 2 intermediary nodes in a neighborhood supplying internet to 4 end-user nodes. We start the scenario with both of them being paid equally by the end user nodes. Payment is per-second, not per-byte. If one of the intermediary nodes starts advertising artifically good routes to the end-user nodes, the other intermediary node will not receive any downstream traffic to those nodes.
 

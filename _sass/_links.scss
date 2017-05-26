@@ -27,6 +27,8 @@ button,
 .button {
   text-shadow: none;
   background-image: none;
+  font-weight: 500;
+  font-family: $heading-font-family;
 }
 
 .button:hover,

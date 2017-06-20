@@ -1,0 +1,26 @@
+---
+layout:     post
+title:      Battlemesh
+author: Jehan Tremback
+summary:    "Last week I went to Battlemesh in Vienna. Battlemesh is a conference and competition that is held in a different location in Europe about once a year. Its original purpose is to test all the routing protocols against each other, hence \"battle\". It's evolved into a great meeting of community network activists and enthusiasts from around Europe and around the world."
+---
+
+Last week I went to Battlemesh in Vienna. Battlemesh is a conference and competition that is held in a different location in Europe about once a year. Its original purpose is to test all the routing protocols against each other, hence "battle". It's evolved into a great meeting of community network activists and enthusiasts from around Europe and around the world. In addition to the setup of the testbed, there are talks going on all week. I presented Althea there, you can see the video [here](https://www.youtube.com/watch?v=f21KCNw7EWw&list=PL3bvPCw5QCLJ-VJPamVeQx-UPNBVyaopj&index=4&ab_channel=AdjyLeak). I was hoping for a lot of tough questions after the talk, but I got a lot of the questions later, in one on one conversations with participants. But more on that later. 
+
+There were some very interesting talks. [One particularly relevant talk](https://www.youtube.com/watch?v=uuSxoWcOEwA&list=PL3bvPCw5QCLJ-VJPamVeQx-UPNBVyaopj&index=8&ab_channel=AdjyLeak) was from Leonardo Macccari, who is part of a team doing some research into community networks for the eu. They've looked into a lot of different networks. what motivates the participants, and in particular, how networks that are supposed to be decentralized can become centralized by influential members owning a lot of the nodes, or dominating discussions.
+
+[Another great talk](https://www.youtube.com/watch?v=NLP4MxQp8kk&list=PL3bvPCw5QCLJ-VJPamVeQx-UPNBVyaopj&index=6&ab_channel=AdjyLeak) was from Electra Wagenrad, who presented a diy solar charging system for mesh nodes. She estimated that a repeater with 2 directional antennas would require a 50 watt solar panel and a standard lead acid car battery. This could be a great way to set up nodes on hillsides etc with minimal support infrastructure.
+
+I was also able to participate in the testbed setup. I wrote a startup script for Babel and a live updating map showing the strengths of connections between nodes. I learned a lot from the experience and will be able to set up a testbed to refine Althea.
+
+It’s set up in an interesting way. Each router has 2.4 and 5 ghz radios. The 2.4 ghz radios are set up to mesh with 802.11s, to create a management network. Meanwhile, the 5 ghz radios are used to test the routing protocol under consideration. Since 2.4ghz often has a better range than 5ghz, this allows for the testing of topologies that may have poor connectivity in parts. Also, the transmit power of the 5ghz radios was turned down to allow a more realistic topology in a smaller area.
+
+In one on one conversations about Althea, I found that many members of European mesh networks have a pragmatic attitude of “show me the code”. It’s a healthy attitude, and one we agree with. We’ll have a proof of concept soon, which will do most of the payment and tunneling, but without the route verification. This will prove out the concept, while taking a temporary shortcut on some of the more time consuming routing protocol development.
+
+As for the basic idea of incentivized mesh, many of them have thought about it before, but there has never really been a strong attempt at automating payments and verification the way we are doing. Guifi.net in Catalonia has a system where for-profit ISPs are able to use their network and contribute back to it in proportion to how much they are using. However, this is all manually calculated and worked out by humans.
+
+I also spoke with Axel, the creator of BMX7, and Linus, who works on Batman. We discussed the technical details of our verified routes. It didn’t seem like they had really considered the idea of verifying the quality metric of routes much before, but Axel has put several mechanisms into BMX7 to stop attacks aimed at simply disrupting the network. We will likely need to add similar mechanisms to Babel, although Babel is working on signed messages which may help prevent a lot of these attacks.
+
+All in all, it was a good experience. They’ve perfected their testbed setup, and the knowledge of how it’s put together will be very helpful for us in the coming months. As for the likelihood of existing community networks being early adopters, I think that they may be a little more conservative because they already have networks up that work with their technical and social structure. They’d probably want to see something pretty well developed before risking their existing technical and social capital.
+
+Also, some members of the community view the inclusion of a monetary incentive with suspicion for political and social reasons. Some of them might have to see Althea increasing competition, improving service, and lowering prices before giving the idea a chance.

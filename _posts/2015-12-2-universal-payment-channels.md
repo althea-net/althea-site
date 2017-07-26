@@ -25,7 +25,7 @@ Upon receiving this message, the bank or blockchain also updates the amounts to 
 ![Step 2]({{ site.url }}/images/upc-step-2.png)
 ![Step 3]({{ site.url }}/images/upc-step-3.png)
 
-There's one issue though- someone could cheat. Let's say that Bob makes a payment to Alice and the balances are updated to Alice- $50 and Bob- $150. Then Alice makes a payment to Bob, reversing the balances to Alice- $150, Bob- $50. Bob could take the old message where he has $150 and post it, cheating Alice out of $100.
+There's one issue though- someone could cheat. Let's say that Alice makes a payment to Bob and the balances are updated to Alice- $50 and Bob- $150. Then Alice makes a payment to Bob, reversing the balances to Alice- $150, Bob- $50. Bob could take the old message where he has $150 and post it, cheating Alice out of $100.
 
 ![Step 4]({{ site.url }}/images/upc-step-4.png)
 

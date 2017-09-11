@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Althea's multihop payment channels
-summary:    "Althea's payment channels are key to how it works, but they are also one of the simpler parts to implement and explain. Payment channels allow payments to be made with a minimum of overhead. In the simple case, a payment can be made between two neighbors in the network with only one packet. The catch is that the neighbors need to have deposited money into the a payment channel contract beforehand to \"open the channel\". However, channels can also be chained together using something called a \"hashlock\" to allow nodes to transact trustlessly over linked payment channels, without needing to be directly linked by a channel."
+summary:    "Althea's payment channels are key to how it works, but they are also one of the simpler parts to implement and explain. Payment channels allow payments to be made with a minimum of overhead. In the simple case, a payment can be made between two neighbors in the network with only one packet."
 ---
 
 Althea's payment channels are key to how it works, but they are also one of the simpler parts to implement and explain. Payment channels allow payments to be made with a minimum of overhead. In the simple case, a payment can be made between two neighbors in the network with only one packet. The catch is that the neighbors need to have deposited money into the a payment channel contract beforehand to "open the channel". However, channels can also be chained together using something called a "hashlock" to allow nodes to transact trustlessly over linked payment channels, without needing to be directly linked by a channel.

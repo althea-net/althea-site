@@ -27,7 +27,7 @@ First, we import a couple of other contracts. `./ECVerify.sol` is a piece of cod
 
 ## Data structures
 
-```
+```js
 contract PaymentChannels is ECVerify, MintableToken {
     struct Channel {
         bytes32 channelId;
@@ -77,7 +77,7 @@ Next come the modifiers. They are not declared with the `modifier` keyword, beca
 
 These deal with the various lifecycle phases of the channel. This is to prevent functions getting called in phases of the lifecycle they are not allowed.
 
-```
+```js
 function channelDoesNotExist (bytes32 _channelId) {
     require(channels[_channelId].channelId != _channelId);
 }
@@ -117,7 +117,7 @@ function channelIsNotSettled (bytes32 _channelId) {
 
 These deal with making sure that state updates are valid. For a state update to be accepted, the new balances have to equal the total that was put in the channel, and it has to have the highest sequence number of all the updates that have been submitted.
 
-```
+```js
 function balancesEqualTotal (bytes32 _channelId, uint256 _balance0, uint256 _balance1) {
     require(_balance0.add(_balance1) == channels[_channelId].totalBalance);
 }
@@ -131,7 +131,7 @@ function sequenceNumberIsHighest (bytes32 _channelId, uint256 _sequenceNumber) {
 
 These check that the signatures submitted with function calls are correct. Some functions need signatures from both participants, and some only need signatures from one. Some functions only need one specific signature.
 
-```
+```js
 function signedByBoth (
     bytes32 _fingerprint, 
     bytes _signature0, 
@@ -160,7 +160,7 @@ function signedByOne (
 
 ## ERC20 balance adjustment
 
-```
+```js
 function incrementBalance(address _addr, uint _value)
     internal
 {
@@ -178,7 +178,7 @@ These functions increment and decrement the ERC20 balances. These could be used 
 
 ## Creating a channel
 
-```
+```js
 function newChannel(
     bytes32 _channelId,
 
@@ -242,7 +242,7 @@ To create a new channel, someone needs to call `newChannel()` with the signature
 
 ## Updating channel state
 
-```
+```js
 function updateState(
     bytes32 _channelId,
     uint256 _sequenceNumber,
@@ -311,7 +311,7 @@ To pay each other, participants send payments in the form of channel updates tha
 ## State update bounties
 
 
-```
+```js
 function updateStateWithBounty(
     bytes32 _channelId,
     uint256 _sequenceNumber,
@@ -365,7 +365,7 @@ function updateStateWithBounty(
 
 ## Submitting preimages
 
-```
+```js
 function submitPreimage (
     bytes32 _hashed,
     bytes32 _preimage
@@ -398,7 +398,7 @@ As you will soon see, Guac's hashlocks follow a simple rule: if anyone has submi
 
 ## Starting the settling period
 
-```
+```js
 function startSettlingPeriod (
     bytes32 _channelId,
     bytes _signature
@@ -427,7 +427,7 @@ This only happens when one participant wants to close the channel without the pa
 
 ## Closing the channel
 
-```
+```js
 function closeChannel (
     bytes32 _channelId
 ) {
@@ -443,7 +443,7 @@ If the channel is settled and has not yet been closed, it can be closed. This ch
 
 ## Skipping the settling period
 
-```
+```js
 function closeChannelFast (
     bytes32 _channelId,
 
@@ -491,7 +491,7 @@ If both participants agree to close the channel, they can skip the settling peri
 
 ## Channel closing business logic
 
-```
+```js
 function closeChannelInternal (
     bytes32 _channelId
 )
@@ -519,7 +519,7 @@ This is the real meat of the payment channel logic. It figures out how much mone
 
 ### Calculating hashlocks
 
-```
+```js
 function getHashlockAdjustment (
     bytes _hashlocks
 ) 
@@ -547,11 +547,11 @@ function getHashlockAdjustment (
     return totalAdjustment;
 }
 ```
-`getHashlockAdjustment()` calculates what effect the hashlocks in the last update have on the balances. We loop through and parse hashes and adjustments out of the hashlock array. There is a `totalAdjustment` that is added to if the preimage for the hash corresponding to a given hashlock's adjustment has been seen.
+`getHashlockAdjustment()` calculates what effect the hashlocks in the last update have on the balances. We loop through and parse hashes and adjustments out of the hashlock array. There is a `totalAdjustment` that is added to if the preimage for the hash corresponding to a given hashlock's adjustment has been seen. Putting all the hashlocks in an array like this lets us easily sign them all. This way of doing things does have a limit: you can only submit about 100-120 hashlocks before running out of gas (at least on our testing framework). However if it is necessary, large hubs processing a lot of transactions could have several parallel payment channels.
 
 ### Applying hashlocks
 
-```
+```js
 function applyHashlockAdjustment (
     bytes32 _channelId,
     uint256 _currentBalance0,

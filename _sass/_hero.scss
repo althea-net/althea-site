@@ -1,10 +1,16 @@
 .hero {
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("/images/transmitters-sky.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/transmitters-sky.jpg");
   background-size: cover;
   color: white;
   text-shadow: none;
 }
 
+.wisp-banner {
+  background: rgb(245, 110, 0);
+  padding: 12px;
+  text-align: center;
+}
 
 @media screen and (min-width: $viewport-medium) {
   html {
@@ -13,7 +19,8 @@
 }
 
 .bottom-hero {
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("/images/aiming.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/aiming.jpg");
   background-size: cover;
   color: white;
   text-shadow: none;

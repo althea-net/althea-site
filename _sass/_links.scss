@@ -1,32 +1,37 @@
 a {
-  color: $link-color;
-  background-image: linear-gradient(to top,
-    rgba(0,0,0,0) 13%,
-    rgba($link-color,.8) 13%,
-    rgba($link-color,.8) 16.5%,
-    rgba(0,0,0,0) 16.5%
-  );
-  text-shadow: white 1px 0px 0px, white -1px 0px 0px;
+  color: inherit;
+  text-decoration: underline;
+  // color: $link-color;
+  // background-image: linear-gradient(
+  //   to top,
+  //   rgba(0, 0, 0, 0) 13%,
+  //   rgba($link-color, 0.8) 13%,
+  //   rgba($link-color, 0.8) 16.5%,
+  //   rgba(0, 0, 0, 0) 16.5%
+  // );
+  // text-shadow: white 1px 0px 0px, white -1px 0px 0px;
 }
 
-a:hover,
-a:focus,
-a:active {
-  color: $link-hover-color;
-  text-decoration: none;
-  background-image: linear-gradient(to top,
-    rgba(0,0,0,0) 13%,
-    rgba($link-hover-color,.8) 13%,
-    rgba($link-hover-color,.8) 16.5%,
-    rgba(0,0,0,0) 16.5%
-  );
-  text-shadow: white 1px 0px 0px, white -1px 0px 0px;
-}
+// a:hover,
+// a:focus,
+// a:active {
+//   color: initial;
+//   text-decoration: underline;
+//   // background-image: linear-gradient(
+//   //   to top,
+//   //   rgba(0, 0, 0, 0) 13%,
+//   //   rgba($link-hover-color, 0.8) 13%,
+//   //   rgba($link-hover-color, 0.8) 16.5%,
+//   //   rgba(0, 0, 0, 0) 16.5%
+//   // );
+//   // text-shadow: white 1px 0px 0px, white -1px 0px 0px;
+// }
 
 button,
 .button {
   text-shadow: none;
   background-image: none;
+  text-decoration: none;
   font-weight: 500;
   font-family: $heading-font-family;
 }
@@ -37,4 +42,9 @@ button,
   color: white;
   text-shadow: none;
   background-image: none;
+  text-decoration: none;
+}
+
+.post-link {
+  text-decoration: none;
 }

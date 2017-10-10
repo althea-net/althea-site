@@ -6,7 +6,7 @@
 table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 1.5;
+  margin-bottom: 15px;
   font-size: 1.125rem;
   // Cells
   > thead,
@@ -18,7 +18,17 @@ table {
         padding: 12px;
         line-height: 1.2;
         vertical-align: top;
-        border-top: 1px solid #333;
+        border: 1px solid #bbb;
+        border-top: none;
+        border-left: none;
+      }
+      > td:last-child {
+        border-right: none;
+      }
+    }
+    > tr:last-child {
+      > td {
+        border-bottom: none;
       }
     }
   }

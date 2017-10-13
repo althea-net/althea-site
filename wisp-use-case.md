@@ -1,9 +1,8 @@
 ---
 layout: page
+title: For wireless ISPs
 permalink: /use-cases/wisp
 ---
-
-# For wireless ISPs
 
 ![WISP use case]({{ site.url }}/images/wisp-use-case.png)
 

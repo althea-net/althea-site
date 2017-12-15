@@ -38,4 +38,6 @@ If Bob simply disconnects and stops signing frames, Alice can send a notice of f
 
 If Bob does send a valid frame, it's now up to Alice to send the next frame before the challenge period is over, otherwise she has forfeited. Alice and Bob could go back and forth like this until the end of the game, but this would be a very slow game, and very expensive because they would have to pay gas each time they submitted a frame.
 
+If Alice sends a notice of forfeiture and then refuses to sign any more frames, Bob can submit a frame signed only by him, which is a valid transition from the frame signed by both him and Alice. Now it's up to Alice to send the next valid frame.
+
 It's in both of their interests to play honestly and keep all frames except for the last one off the chain, but the slow and inefficient frame-by-frame process is always there as a fallback to keep the players honest.

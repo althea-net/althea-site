@@ -47,7 +47,7 @@ var Module = (function () {
 		});
 		readFromFirebase();
 
-		markerCluster = new MarkerClusterer(map, markerArr, {imagePath: "./resources/m"});
+		markerCluster = new MarkerClusterer(map, markerArr, {imagePath: "/images/m"});
 	};
 
 	function readFromFirebase() {

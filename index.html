@@ -4,7 +4,7 @@ permalink: /
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body class="site{% if site.animated %} animated fade-in-down{% endif %}">
+<body class="site{% if site.animated %} animated fade-in-down{% endif %}", onload="Module.initMap()">
   <div class="site-wrap">
     {% include header.html %}
     <!--<div class="post p2 p-responsive wrap" role="main">-->
@@ -46,6 +46,10 @@ permalink: /
     <div class="wrap p2 center">
       <h1 class="center">Demonstration</h1>
       <iframe width="500" height="315" src="https://www.youtube.com/embed/IyFEYEcHJyA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="wrap p2 center">
+      <h1 class="center">Get Althea in your area!</h1>
+      {% include althea-node-locator.html %}
     </div>
     <div class="wrap p2">
       <div class="measure">

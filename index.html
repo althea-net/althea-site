@@ -9,23 +9,24 @@ permalink: /
     {% include header.html %}
     <!--<div class="post p2 p-responsive wrap" role="main">-->
     <div class="hero">
-      <div class="wisp-banner">Wireless ISPs: <a href="{{ site.url }}/use-cases/wisp">Click here</a> to learn how Althea can help you get more revenue out of your network.</div>
+      <!-- <div class="wisp-banner">Wireless ISPs: <a href="{{ site.url }}/use-cases/wisp">Click here</a> to learn how Althea can help you get more revenue out of your network.</div> -->
       <div class="title p2">
         <div class="measure">
-          <div class="grid">
-            <div class="col-2-3">
-              <h1>Create decentralized, cryptocurrency powered networks</h1>
-            </div>
+          <div style="display: flex; align-items: center; flex-direction: column; overflow: hidden">
+            <h1 style="text-align: center;">Create decentralized, cryptocurrency powered networks</h1>
+            <iframe width="500" height="315" src="https://www.youtube.com/embed/IyFEYEcHJyA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
           </div>
-          <div class="grid">
+          <h2 style="text-align: center" >Get updates on the project</h2>
+          <div style="display: flex; flex: 1; flex-wrap: wrap; justify-content: space-evenly;">
+              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="#"><img src="/images/medium.svg"/>Medium</a>
+              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="https://twitter.com/Altheamesh"><img src="/images/twitter.svg"/>Twitter</a>
             <!-- Begin MailChimp Signup Form -->
-            <div id="mc_embed_signup">
-              <form action="//altheamesh.us16.list-manage.com/subscribe/post?u=c87d58f5214c1662412ff17d0&amp;id=bb89cc7a8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                <div id="mc_embed_signup_scroll">
-                  <h2>Get updates on the project</h2>
-                  <div class="mc-field-group">
+            <div id="mc_embed_signup" style="display: block;">
+              <form action="//altheamesh.us16.list-manage.com/subscribe/post?u=c87d58f5214c1662412ff17d0&amp;id=bb89cc7a8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate >
+                <div style="display: flex" id="mc_embed_signup_scroll">
+                  <div class="mc-field-group" style="max-width: 300px;">
                     <label for="mce-EMAIL">Email Address </label>
-                    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                    <input placeholder="mailing list" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
                   </div>
                   <div id="mce-responses" class="clear">
                     <div class="response" id="mce-error-response" style="display:none"></div>
@@ -33,7 +34,7 @@ permalink: /
                   </div> 
                   <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                   <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c87d58f5214c1662412ff17d0_bb89cc7a8a" tabindex="-1" value=""></div>
-                  <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                  <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
                 </div>
               </form>
             </div>
@@ -43,14 +44,12 @@ permalink: /
       </div>
       <!--<img src="/images/transmitters-sky.png"/>-->
     </div>
-    <div class="wrap p2 center">
+    <!-- <div class="wrap p2 center">
       <h1 class="center">Demonstration</h1>
       <iframe width="500" height="315" src="https://www.youtube.com/embed/IyFEYEcHJyA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-    </div>
-    <div class="wrap p2 center">
-      <h1 class="center">Get Althea in your area!</h1>
-      {% include althea-node-locator.html %}
-    </div>
+    </div> -->
+      <h1 style="text-align: center; margin-top: 20px">Prospective deployments</h1>
+    {% include althea-node-locator.html %}
     <div class="wrap p2">
       <div class="measure">
         <h1 class="center">What it is</h1>

@@ -1,6 +1,11 @@
+---
+layout: page
+title: Request Deployment
+permalink: /request-deployment
+---
+
 <div id="map">
 </div>
-<!-- 
 <div class="measure">
 	<iframe name="votar" style="display:none;"></iframe>
 	<form action="https://althea-locator.firebaseapp.com/submit" method="POST" target="votar">
@@ -8,14 +13,12 @@
 			<div class="form-group">
 				<label for="user_fname_input">First Name:</label>
 				<br>
-				<input type="text" id="user_fname_input" name="user_fname_input" placeholder="optional" autocomplete="off" maxlength="15"
-				    required>
+				<input type="text" id="user_fname_input" name="user_fname_input" placeholder="optional" autocomplete="off" maxlength="15">
 			</div>
 			<div class="form-group">
 				<label for="user_lname_input">Last Name:</label>
 				<br>
-				<input type="text" id="user_lname_input" name="user_lname_input" placeholder="optional" autocomplete="off" maxlength="15"
-				    required>
+				<input type="text" id="user_lname_input" name="user_lname_input" placeholder="optional" autocomplete="off" maxlength="15">
 			</div>
 			<div class="form-group">
 				<label for="user_email_input">Email Address:</label>
@@ -298,7 +301,8 @@
 			<input class="button" type="submit" id="submit" value="Submit" />
 		</div>
 	</form>
-</div> -->
+</div>
 
 <script type="text/javascript" src="/scripts/markerclusterer.js"></script>
+
 <script type="text/javascript" src="/scripts/app.js"></script>

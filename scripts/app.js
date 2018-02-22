@@ -2,7 +2,12 @@
 
 var Module = (function() {
   var config = {
-    // "ADD STUFF HERE"
+    apiKey: "AIzaSyA0Q7m1gULd67FSmRGaoP6UUtV-zlmMcJc",
+    authDomain: "althea-locator.firebaseapp.com",
+    databaseURL: "https://althea-locator.firebaseio.com",
+    projectId: "althea-locator",
+    storageBucket: "althea-locator.appspot.com",
+    messagingSenderId: "569457338008"
   };
 
   firebase.initializeApp(config);

@@ -1,0 +1,170 @@
+---
+permalink: /
+---
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+<body class="site{% if site.animated %} animated fade-in-down{% endif %}", onload="Module.initMap()">
+  <div class="site-wrap">
+    {% include header.html %}
+    <!--<div class="post p2 p-responsive wrap" role="main">-->
+    <div class="hero">
+      <div class="wisp-banner">Wireless ISPs: <a href="{{ site.url }}/use-cases/wisp">Click here</a> to learn how Althea can help you get more revenue out of your network.</div>
+      <div class="title p2">
+        <div class="measure">
+          <div class="grid">
+            <div class="col-2-3">
+              <h1>Create decentralized, cryptocurrency powered networks</h1>
+            </div>
+          </div>
+          <div class="grid">
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+              <form action="//altheamesh.us16.list-manage.com/subscribe/post?u=c87d58f5214c1662412ff17d0&amp;id=bb89cc7a8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll">
+                  <h2>Get updates on the project</h2>
+                  <div class="mc-field-group">
+                    <label for="mce-EMAIL">Email Address </label>
+                    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                  </div>
+                  <div id="mce-responses" class="clear">
+                    <div class="response" id="mce-error-response" style="display:none"></div>
+                    <div class="response" id="mce-success-response" style="display:none"></div>
+                  </div> 
+                  <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c87d58f5214c1662412ff17d0_bb89cc7a8a" tabindex="-1" value=""></div>
+                  <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                </div>
+              </form>
+            </div>
+            <!--End mc_embed_signup-->
+          </div>
+        </div>
+      </div>
+      <!--<img src="/images/transmitters-sky.png"/>-->
+    </div>
+    <div class="wrap p2 center">
+      <h1 class="center">Demonstration</h1>
+      <iframe width="500" height="315" src="https://www.youtube.com/embed/IyFEYEcHJyA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="wrap p2 center">
+        <h1 class="center">Get Althea in your area!</h1>
+        {% include althea-node-locator.html %}
+    </div>
+    <div class="wrap p2">
+      <div class="measure">
+        <h1 class="center">What it is</h1>
+        <div class="grid">
+          <div class="col-1-3">
+            <div class="bullet-image">
+              <img src="/images/mesh.png"/>
+            </div>
+          </div>
+          <div class="col-2-3">
+            <h2>More than a hotspot</h2>
+            Althea isn’t just a new way to pay for wifi at coffee shops and airports. It’s a system of software that will let communities set up decentralized ISPs. Users purchase internet service and equipment owners are automatically compensated for their contributions to the network.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-1-3">
+            <div class="bullet-image">
+              <img src="/images/choice.png"/>
+            </div>
+          </div>
+          <div class="col-2-3">
+            <h2>A cure for monopolies</h2>
+            Each Althea node is constantly looking for the cheapest and best source of (cryptographically verified) bandwidth, and can switch connectivity providers in seconds. This creates a competitive, decentralized marketplace instead of a single provider.
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-1-3">
+            <div class="bullet-image">
+              <img src="/images/lock.png"/>
+            </div>
+          </div>
+          <div class="col-2-3">
+            <h2>Private and neutral by default</h2>
+            VPN tunnels are a core part of Althea’s design. Operators of networking equipment in an Althea network can never see a user’s browsing history, or discriminate between types of content.
+          </div>
+        </div>
+      </div>
+
+      <div class="measure">
+        <h1 class="center">How it works</h1>
+        <img src="/images/basic-diagram.png"/>
+        <div class="grid">
+          <div class="col-1-3">
+            <h2>1</h2> End users load up their device or wifi router with blockchain tokens to pay for internet access.
+          </div>
+          <div class="col-1-3">
+            <h2>2</h2> A mesh of rooftop transmitters forward packets. They earn tokens and compete to provide service. 
+          </div>
+          <div class="col-1-3">
+            <h2>3</h2> Uplinks act as gateways to the internet, also earning tokens, competing with other uplinks in the area.
+          </div>
+        </div>
+        <hr/>
+        <div class="grid center">
+          <a href="/how-it-works"><button class="button" >More technical details</button></a>
+          <a href="/documents/whitepaper.pdf"><button class="button" >Whitepaper (the most technical details)</button></a>
+        </div>
+        <hr/>
+      </div>
+    </div>
+
+    <div class="bottom-hero">
+      <div class="title p2">
+        <h1 class="center">How do I start an Althea network?</h1>
+
+        <div class="measure">
+          <div class="grid">
+            <p>Our software is still under development, but if you’re excited about the concept, we’d like to keep you in the loop. Soon we’ll start building out the first Althea networks, which will need sites for transmitters and equipment installers and operators.</p>
+
+            <p>If you have experience in networking, real estate, construction, or you can see other buildings from your window or roof, you could earn money providing connectivity in an Althea network.</p>
+
+            <p>If you have experience running a WISP, definitely get in touch. Althea is all about creating tools to let wireless and mixed networks compete with the big monopolies, and we’d love your input.</p>
+          </div>
+          <div class="grid">
+
+            <div class="col-1-2">
+              <h2>Get in touch</h2>
+              <a href="https://riot.im/app/#/room/#althea:matrix.org"><button class="button" >Join our chat</button></a>
+              <a href="mailto:hello@altheamesh.com"><button class="button" >Send us an email</button></a>
+            </div>
+
+            <div class="col-1-2">
+              <!-- Begin MailChimp Signup Form -->
+              <div id="mc_embed_signup">
+                <form action="//altheamesh.us16.list-manage.com/subscribe/post?u=c87d58f5214c1662412ff17d0&amp;id=bb89cc7a8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <div id="mc_embed_signup_scroll">
+                    <h2>Get updates on the project</h2>
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL">Email Address </label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="your email">
+                    </div>
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div> 
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c87d58f5214c1662412ff17d0_bb89cc7a8a" tabindex="-1" value=""></div>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                  </div>
+                </form>
+              </div>
+              <!--End mc_embed_signup-->
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+

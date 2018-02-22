@@ -2,33 +2,48 @@ input,
 select,
 textarea,
 fieldset {
-  font-size: $form-field-font-size;
+  // font-size: $form-field-font-size;
   margin-top: 0;
-  margin-bottom: $space-1, .5rem;
+  margin-bottom: $space-1, 0.5rem;
 }
 
-input[type=text],
-input[type=datetime],
-input[type=datetime-local],
-input[type=email],
-input[type=month],
-input[type=number],
-input[type=password],
-input[type=search],
-input[type=tel],
-input[type=time],
-input[type=url],
-input[type=week] {
-  box-sizing: border-box;
+input[type="text"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
   height: $form-field-height;
-  padding: $form-field-padding-y $form-field-padding-x;
   vertical-align: middle;
   -webkit-appearance: none;
 }
 
-select {
+select,
+input[type="text"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
   box-sizing: border-box;
   line-height: 1.75;
+  border: 1px solid black;
+  background: #fbfbfb;
+  margin-bottom: 0;
+  border-radius: 4px;
+  width: 100%;
   padding: $form-field-padding-y $form-field-padding-x;
 }
 
@@ -43,6 +58,19 @@ textarea {
   padding: $form-field-padding-y $form-field-padding-x;
 }
 
+.locator-form {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 5px;
+  font-size: 90%;
+}
+
+.locator-form .form-group {
+  margin: 5px;
+  flex-grow: 1;
+}
+
 .form-stacked input,
 .form-stacked textarea,
 .form-stacked select {
@@ -51,7 +79,7 @@ textarea {
 
 .field-light {
   background-color: $off-white;
-  transition: box-shadow .2s ease;
+  transition: box-shadow 0.2s ease;
   border-style: solid;
   border-width: $border-width;
   border-color: $border-color;
@@ -61,7 +89,7 @@ textarea {
 .field-light:focus {
   outline: none;
   border-color: $blue;
-  box-shadow: 0 0 2px rgba($blue,.5);
+  box-shadow: 0 0 2px rgba($blue, 0.5);
 }
 
 .field-light:disabled {
@@ -74,7 +102,7 @@ textarea {
 }
 
 .field-light:invalid {
-  border-color: $red;
+  border-color: $blue;
 }
 
 .field-light.is-success {
@@ -89,10 +117,9 @@ textarea {
   border-color: $red;
 }
 
-
 .radio-light,
 .checkbox-light {
-  transition: box-shadow .2s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .radio-light {
@@ -102,5 +129,5 @@ textarea {
 .radio-light:focus,
 .checkbox-light:focus {
   outline: none;
-  box-shadow: 0 0 2px rgba($blue, .5);
+  box-shadow: 0 0 2px rgba($blue, 0.5);
 }

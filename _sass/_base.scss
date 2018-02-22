@@ -13,7 +13,8 @@ MIT License http://opensource.org/licenses/MIT
 
 */
 
-html, body {
+html,
+body {
   height: auto;
   min-height: 100%;
 }
@@ -28,7 +29,12 @@ em img {
 }
 
 body {
-          box-sizing: border-box;
-     -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+
+#map {
+  padding-top: 400px;
+  width: 100%;
 }

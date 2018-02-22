@@ -1,24 +1,28 @@
-
-<div id="map"></div>
-	<div class="user_form">
-		<iframe name="votar" style="display:none;"></iframe>
-		<form action="https://althea-locator.firebaseapp.com/submit" method="POST" target="votar">
-			<div>
-				<label for="user_email_input">Email Address:</label>
-				<br>
-				<input type="email" id="user_email_input" name="user_email_input" class="form_control" placeholder="required" autocomplete="off" maxlength="25" required>
-			</div>
-			<div>
+<div id="map">
+</div>
+<div class="measure">
+	<iframe name="votar" style="display:none;"></iframe>
+	<form action="https://althea-locator.firebaseapp.com/submit" method="POST" target="votar">
+		<div class="locator-form">
+			<div class="form-group">
 				<label for="user_fname_input">First Name:</label>
 				<br>
-				<input type="text" id="user_fname_input" name="user_fname_input" class="form_control" placeholder="optional" autocomplete="off" maxlength="15" required>
+				<input type="text" id="user_fname_input" name="user_fname_input" placeholder="optional" autocomplete="off" maxlength="15"
+				    required>
 			</div>
-			<div>
+			<div class="form-group">
 				<label for="user_lname_input">Last Name:</label>
 				<br>
-				<input type="text" id="user_lname_input" name="user_lname_input" class="form_control" placeholder="optional" autocomplete="off" maxlength="15" required>
+				<input type="text" id="user_lname_input" name="user_lname_input" placeholder="optional" autocomplete="off" maxlength="15"
+				    required>
 			</div>
-			<div>
+			<div class="form-group">
+				<label for="user_email_input">Email Address:</label>
+				<br>
+				<input type="email" id="user_email_input" name="user_email_input" placeholder="required" autocomplete="off" maxlength="25"
+				    required>
+			</div>
+			<div class="form-group">
 				<label for="user_country_menu">Country:</label>
 				<br>
 				<select id="user_country_menu" name="user_country_menu">
@@ -273,24 +277,27 @@
 					<option value="ZW">Zimbabwe</option>
 				</select>
 			</div>
-			<div>
+			<div class="form-group">
 				<label name="user_city_input">City:</label>
 				<br>
-				<input type="text" id="user_city_input" name="user_city_input" class="form_control" autocomplete="off" placeholder="required" maxlength="20" required/>
+				<input type="text" id="user_city_input" name="user_city_input" autocomplete="off" placeholder="required" maxlength="20" required/>
 			</div>
-			<div>
+			<div class="form-group">
 				<label name="user_zip_code_input">Zip/Postal Code:</label>
 				<br>
-				<input type="text" id="user_zip_code_input" name="user_zip_code_input" class="form_control" autocomplete="off" placeholder="optional" maxlength="15" />
+				<input type="text" id="user_zip_code_input" name="user_zip_code_input" autocomplete="off" placeholder="optional" maxlength="15"
+				/>
 			</div>
-			<div>
-				<div class="g-recaptcha"
-               data-sitekey="ADD STUFF HERE">
-            </div>
+			<div class="form-group" style="flex-grow: 0">
+				<div class="g-recaptcha" data-sitekey="6LeopD8UAAAAAGQ6b98202chGMEYdsXBAoOly_Zk">
+				</div>
 			</div>
-			<input type="submit" id="submit" value="Submit" />
-		</form>
-		<button onclick="Module.resetView()">Reset View</button>
-	</div>
-	<script type="text/javascript" src="/scripts/markerclusterer.js"></script>
-	<script type="text/javascript" src="/scripts/app.js"></script>
+		</div>
+		<div>
+			<input class="button" type="submit" id="submit" value="Submit" />
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="/scripts/markerclusterer.js"></script>
+<script type="text/javascript" src="/scripts/app.js"></script>

@@ -1,22 +1,23 @@
 // @ts-check
 
+function recaptchaCallback() {
+  document.getElementById("submit").removeAttribute("disabled");
+}
+
+document.getElementById("althea-in-my-area").addEventListener("click", () => {
+  document.getElementById("map-form").style.display = "block";
+});
+
 var Module = (function() {
   var config = {
-    apiKey: "AIzaSyA0Q7m1gULd67FSmRGaoP6UUtV-zlmMcJc",
-    authDomain: "althea-locator.firebaseapp.com",
-    databaseURL: "https://althea-locator.firebaseio.com",
-    projectId: "althea-locator",
-    storageBucket: "althea-locator.appspot.com",
-    messagingSenderId: "569457338008"
+    apiKey: "AIzaSyC4gjBacGp12q20Q_I_EbG4agDCZEfcaDo",
+    authDomain: "althea-node-map.firebaseapp.com",
+    databaseURL: "https://althea-node-map.firebaseio.com",
+    projectId: "althea-node-map",
+    storageBucket: "althea-node-map.appspot.com"
   };
 
   firebase.initializeApp(config);
-
-  var map = null;
-  var markerCluster = null;
-  var markerArr = [];
-  var geocoder = null;
-  var address = null;
 
   var emailAddr = document.getElementById("user_email_input");
   var firstName = document.getElementById("user_fname_input");
@@ -27,32 +28,34 @@ var Module = (function() {
 
   function initMap() {
     // Initialize blank map with markers
-    resetView();
+    const map = resetView();
 
     geocoder = new google.maps.Geocoder();
 
     document.getElementById("submit").addEventListener("click", function() {
-      address = city.value + " " + zipCode.value + " " + country.value;
-      geocodeAddress(geocoder, map);
+      geocodeAddress(
+        city.value + " " + zipCode.value + " " + country.value,
+        geocoder,
+        map
+      );
     });
   }
 
   function resetView() {
-    map = new google.maps.Map(document.getElementById("map"), {
+    const map = new google.maps.Map(document.getElementById("map"), {
       center: {
         lat: 15,
         lng: 0
       },
       zoom: 2
     });
-    readFromFirebase();
 
-    markerCluster = new MarkerClusterer(map, markerArr, {
-      imagePath: "/images/m"
-    });
+    readFromFirebase(map);
+
+    return map;
   }
 
-  function readFromFirebase() {
+  function readFromFirebase(map) {
     markerArr = [];
 
     // Query data base for stored location
@@ -62,39 +65,42 @@ var Module = (function() {
       .child("Markers/");
 
     fireDataBase.on("child_added", function(snapshot) {
-      var storedData = snapshot.val();
-      var keys = Object.keys(storedData);
+      var node = snapshot.val();
+      console.log("node: ", node);
 
-      for (var i = 0; i < keys.length; i++) {
-        var k = keys[i];
-        var storedLat = storedData[k].Latitude;
-        var storedLng = storedData[k].Longitude;
-
-        // Updates map with stored marker
-        var marker = new google.maps.Marker({
-          position: {
-            lat: parseFloat(storedLat),
-            lng: parseFloat(storedLng)
-          }
-        });
-        marker.setMap(map);
-        markerArr.push(marker);
-      }
-      markerCluster.addMarkers(markerArr);
+      // Updates map with stored marker
+      var marker = new google.maps.Marker({
+        icon: {
+          url: node.Active
+            ? "/images/active_pointer.png"
+            : "/images/inactive_pointer.png",
+          scaledSize: new google.maps.Size(30, 48)
+        },
+        position: {
+          lat: parseFloat(node.GPS_Coordinates.Latitude),
+          lng: parseFloat(node.GPS_Coordinates.Longitude)
+        }
+      });
+      marker.setMap(map);
     });
   }
 
   // Convert address to Lat/ Lng
-  function geocodeAddress(geocoder, resultsMap) {
+  function geocodeAddress(address, geocoder, resultsMap) {
     geocoder.geocode(
       {
-        address: address
+        address
       },
       function(results, status) {
+        console.log("Geocode results:", results);
         if (status === "OK") {
           resultsMap.setCenter(results[0].geometry.location);
           resultsMap.setZoom(14);
           var marker = new google.maps.Marker({
+            icon: {
+              url: "/images/inactive_pointer.png",
+              scaledSize: new google.maps.Size(30, 48)
+            },
             position: results[0].geometry.location,
             map: resultsMap
           });

@@ -8,7 +8,7 @@ permalink: /request-deployment
 </div>
 <div class="measure">
 	<iframe name="votar" style="display:none;"></iframe>
-	<form action="https://althea-locator.firebaseapp.com/submit" method="POST" target="votar">
+	<form action="https://althea-node-map.firebaseapp.com/submit" method="POST" target="votar">
 		<div class="locator-form">
 			<div class="form-group">
 				<label for="user_fname_input">First Name:</label>

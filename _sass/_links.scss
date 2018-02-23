@@ -45,13 +45,23 @@ button img,
   margin-right: 0.5em;
 }
 
-.button:hover,
-.button:focus,
+button:active,
 .button:active {
   color: white;
   text-shadow: none;
   background-image: none;
   text-decoration: none;
+}
+
+button:focus,
+.button:focus {
+  outline: none;
+}
+
+.button:disabled {
+  background: rgb(175, 175, 175);
+  cursor: default;
+  color: rgb(97, 97, 97) !important;
 }
 
 .post-link {

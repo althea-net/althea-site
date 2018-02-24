@@ -76,6 +76,7 @@ var Module = (function() {
             : "/images/inactive_pointer.png",
           scaledSize: new google.maps.Size(30, 48)
         },
+        zIndex: node.Active ? 1 : 0,
         position: {
           lat: parseFloat(node.GPS_Coordinates.Latitude),
           lng: parseFloat(node.GPS_Coordinates.Longitude)

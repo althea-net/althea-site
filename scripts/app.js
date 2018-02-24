@@ -2,13 +2,18 @@
 
 var Module = (function () {
 	var config = {
-		"ADD STUFF HERE"
+		"apiKey": "<YOUR API KEY>",
+		"databaseURL": "https://<YOUR PROJECT ID>.firebaseio.com",
+		"storageBucket": "<YOUR PROJECT ID>.appspot.com",
+		"authDomain": "<YOUR PROJECT ID>.firebaseapp.com",
+		"messagingSenderId": "<MESSAGING SENDER ID>",
+		"projectId": "<YOUR PROJECT ID>"
 	};
-	 
+
 	firebase.initializeApp(config);
 
 	var map = null;
-	var markerCluster = null; 
+	var markerCluster = null;
 	var markerArr = [];
 	var geocoder = null;
 	var address = null;
@@ -42,7 +47,7 @@ var Module = (function () {
 		});
 		readFromFirebase();
 
-		markerCluster = new MarkerClusterer(map, markerArr, {imagePath: "/images/m"});
+		markerCluster = new MarkerClusterer(map, markerArr, { imagePath: "/images/m" });
 	};
 
 	function readFromFirebase() {

@@ -1,6 +1,6 @@
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("{{'/images/transmitters-sky.jpg' |  prepend: site.baseurl}}");
+    url("/images/transmitters-sky.jpg");
   background-size: cover;
   color: white;
   text-shadow: none;
@@ -20,7 +20,7 @@
 
 .bottom-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("{{'/images/aiming.jpg' | prepend: site.baseurl}}");
+    url("/images/aiming.jpg");
   background-size: cover;
   color: white;
   text-shadow: none;

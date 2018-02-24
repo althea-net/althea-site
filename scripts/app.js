@@ -1,5 +1,7 @@
 // @ts-check
 
+console.log("js loaded");
+
 function recaptchaCallback() {
   document.getElementById("submit").removeAttribute("disabled");
 }

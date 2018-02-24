@@ -31,18 +31,37 @@ button,
 .button {
   text-shadow: none;
   background-image: none;
+  background: $blue;
+  color: black;
   text-decoration: none;
   font-weight: 500;
   font-family: $heading-font-family;
+  // display: flex;
 }
 
-.button:hover,
-.button:focus,
+button img,
+.button img {
+  height: 1em;
+  margin-right: 0.5em;
+}
+
+button:active,
 .button:active {
   color: white;
   text-shadow: none;
   background-image: none;
   text-decoration: none;
+}
+
+button:focus,
+.button:focus {
+  outline: none;
+}
+
+.button:disabled {
+  background: rgb(175, 175, 175);
+  cursor: default;
+  color: rgb(97, 97, 97) !important;
 }
 
 .post-link {

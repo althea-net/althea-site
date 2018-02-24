@@ -18,8 +18,8 @@ permalink: /
           </div>
           <h2 style="text-align: center" >Get updates on the project</h2>
           <div style="display: flex; flex: 1; flex-wrap: wrap; justify-content: space-evenly;">
-              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="#"><img src="/images/medium.svg"/>Medium</a>
-              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="https://twitter.com/Altheamesh"><img src="/images/twitter.svg"/>Twitter</a>
+              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="#"><img src="{{'/images/medium.svg' |  prepend: site.baseurl}}"/>Medium</a>
+              <a class="button" style="margin-right: 5px; margin-bottom: 15px" href="https://twitter.com/Altheamesh"><img src="{{'/images/twitter.svg' | prepend: site.baseurl}}"/>Twitter</a>
             <!-- Begin MailChimp Signup Form -->
             <div id="mc_embed_signup" style="display: block;">
               <form action="//altheamesh.us16.list-manage.com/subscribe/post?u=c87d58f5214c1662412ff17d0&amp;id=bb89cc7a8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate >
@@ -42,12 +42,7 @@ permalink: /
           </div>
         </div>
       </div>
-      <!--<img src="/images/transmitters-sky.png"/>-->
     </div>
-    <!-- <div class="wrap p2 center">
-      <h1 class="center">Demonstration</h1>
-      <iframe width="500" height="315" src="https://www.youtube.com/embed/IyFEYEcHJyA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-    </div> -->
     {% include althea-node-locator.html %}
     <div class="wrap p2">
       <div class="measure">

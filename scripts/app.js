@@ -66,7 +66,6 @@ var Module = (function() {
 
     fireDataBase.on("child_added", function(snapshot) {
       var node = snapshot.val();
-      console.log("node: ", node);
 
       // Updates map with stored marker
       var marker = new google.maps.Marker({
@@ -93,7 +92,6 @@ var Module = (function() {
         address
       },
       function(results, status) {
-        console.log("Geocode results:", results);
         if (status === "OK") {
           resultsMap.setCenter(results[0].geometry.location);
           resultsMap.setZoom(14);

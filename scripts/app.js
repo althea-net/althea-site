@@ -33,6 +33,7 @@ var Module = (function() {
     geocoder = new google.maps.Geocoder();
 
     document.getElementById("map-form").addEventListener("submit", function() {
+      document.getElementById("map").scrollIntoView();
       geocodeAddress(
         city.value + " " + zipCode.value + " " + country.value,
         geocoder,

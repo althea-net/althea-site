@@ -1,6 +1,7 @@
 // @ts-check
 
 function recaptchaCallback() {
+  document.getElementById("map-form").scrollIntoView();
   document.getElementById("submit").removeAttribute("disabled");
 }
 

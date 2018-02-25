@@ -1,7 +1,12 @@
 // @ts-check
 
 function recaptchaCallback() {
-  document.getElementById("map-form").scrollIntoView();
+  if (
+    window.innerWidth < 768 &&
+    (/iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+  ) {
+    document.getElementById("map-form").scrollIntoView();
+  }
   document.getElementById("submit").removeAttribute("disabled");
 }
 

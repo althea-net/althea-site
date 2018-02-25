@@ -92,7 +92,7 @@ var Module = (function() {
   function geocodeAddress(address, geocoder, resultsMap) {
     geocoder.geocode(
       {
-        address
+        address: address
       },
       function(results, status) {
         if (status === "OK") {

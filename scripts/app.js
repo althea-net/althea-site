@@ -4,9 +4,11 @@ function recaptchaCallback() {
   document.getElementById("submit").removeAttribute("disabled");
 }
 
-document.getElementById("althea-in-my-area").addEventListener("click", () => {
-  document.getElementById("map-form").style.display = "block";
-});
+document
+  .getElementById("althea-in-my-area")
+  .addEventListener("click", function() {
+    document.getElementById("map-form").style.display = "block";
+  });
 
 var Module = (function() {
   var config = {

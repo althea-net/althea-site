@@ -32,7 +32,7 @@ var Module = (function() {
 
     geocoder = new google.maps.Geocoder();
 
-    document.getElementById("submit").addEventListener("click", function() {
+    document.getElementById("map-form").addEventListener("submit", function() {
       geocodeAddress(
         city.value + " " + zipCode.value + " " + country.value,
         geocoder,

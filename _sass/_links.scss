@@ -30,8 +30,11 @@ a {
 button,
 .button {
   text-shadow: none;
+  box-shadow: inset -1px -2px #51809b;
+  border-radius: 2px;
+  border: none;
   background-image: none;
-  background: $blue;
+  background: #81d1ff;
   color: black;
   text-decoration: none;
   font-weight: 500;
@@ -47,7 +50,9 @@ button img,
 
 button:active,
 .button:active {
-  color: white;
+  // color: white;
+  background: #6eb1d8;
+  box-shadow: none;
   text-shadow: none;
   background-image: none;
   text-decoration: none;

@@ -126,3 +126,5 @@ var Module = (function() {
     resetView: resetView
   };
 })();
+
+Module.initMap();

@@ -17,7 +17,7 @@
 
 <div class="measure wrap p2">
 		<iframe name="votar" style="display:none;"></iframe>
-		<form name="map-form" id="map-form" style="display:none;" action="https://althea-node-map.firebaseapp.com/submit" method="POST" target="votar">
+		<form name="map-form" id="map-form" style="display:none;" action="{{ include.action }}" method="POST" target="votar">
 			<div class="locator-form">
 				<div class="form-group">
 					<label for="user_email_input">Email Address:</label>

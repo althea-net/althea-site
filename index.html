@@ -4,7 +4,7 @@ permalink: /
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body class="site{% if site.animated %} animated fade-in-down{% endif %}", onload="Module.initMap()">
+<body class="site{% if site.animated %} animated fade-in-down{% endif %}">
   <div class="site-wrap">
     {% include header.html %}
     <!--<div class="post p2 p-responsive wrap" role="main">-->
@@ -43,7 +43,7 @@ permalink: /
         </div>
       </div>
     </div>
-    {% include althea-node-locator.html %}
+    {% include althea-node-locator.html action="https://althea-node-map.firebaseapp.com/submit" %}
     <div class="wrap p2">
       <div class="measure">
         <h1 class="center">What it is</h1>

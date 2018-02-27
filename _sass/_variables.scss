@@ -1,18 +1,19 @@
 // Typography
 $base-font-size: 14px !default;
 $bold-font-weight: bold !default;
-$font-family: 'Helvetica Neue', Helvetica, sans-serif !default;
+$font-family: "Helvetica Neue", Helvetica, sans-serif !default;
 $line-height: 1.5 !default;
-$heading-font-family: 'Rajdhani', 'Helvetica Neue', Helvetica, sans-serif !default;
+$heading-font-family: "Rajdhani", "Helvetica Neue", Helvetica,
+  sans-serif !default;
 $heading-font-weight: 500 !default;
 $heading-line-height: 1.25 !default;
-$monospace-font-family: 'Source Code Pro', Consolas, monospace !default;
+$monospace-font-family: "Source Code Pro", Consolas, monospace !default;
 $h1: 2.5rem !default;
 $h2: 1.5rem !default;
 $h3: 1.25rem !default;
 $h4: 1rem !default;
-$h5: .875rem !default;
-$h6: .75rem !default;
+$h5: 0.875rem !default;
+$h6: 0.75rem !default;
 $h00: 4rem !default;
 $h0: 3rem !default;
 $h00-responsive: 8vw !default;
@@ -35,7 +36,7 @@ $viewport-medium: 48em;
 $viewport-large: 64em;
 
 // Colors
-$blue: #0076df !default;
+$blue: #81d1ff !default;
 $red: #f95020 !default;
 $green: #00cf26 !default;
 $yellow: #efcc00 !default;
@@ -50,23 +51,23 @@ $dark-gray: #333 !default;
 $mid-gray: #777 !default;
 $light-gray: #ccc !default;
 $lighter-gray: #eee !default;
-$darken-1: rgba(#000,.0625) !default;
-$darken-2: rgba(#000,.125) !default;
-$darken-3: rgba(#000,.25) !default;
-$darken-4: rgba(#000,.5) !default;
-$off-white: #FFFFFF;
-$off-black: #14160A;
+$darken-1: rgba(#000, 0.0625) !default;
+$darken-2: rgba(#000, 0.125) !default;
+$darken-3: rgba(#000, 0.25) !default;
+$darken-4: rgba(#000, 0.5) !default;
+$off-white: #ffffff;
+$off-black: #14160a;
 
 // Links
 $link-color: $dark-gray;
 $link-hover-color: darken($dark-gray, 40%);
 
 // Breakpoints
-$breakpoint-md: '(min-width: 52em)';
-$breakpoint-xl: '(min-width: 96em)';
+$breakpoint-md: "(min-width: 52em)";
+$breakpoint-xl: "(min-width: 96em)";
 
 // Whitespace
-$space-1: .5rem !default;
+$space-1: 0.5rem !default;
 $space-2: 1rem !default;
 $space-3: 2rem !default;
 $space-4: 4rem !default;
@@ -75,26 +76,26 @@ $space-4: 4rem !default;
 $button-font-size: inherit !default;
 $button-font-weight: normal !default;
 $button-line-height: 1.125rem !default;
-$button-padding-y: .5rem !default;
+$button-padding-y: 0.5rem !default;
 $button-padding-x: 1rem !default;
 $button-font-family: $heading-font-family;
 
 // Forms
 $form-field-font-size: 1rem !default;
 $form-field-height: 2.25rem !default;
-$form-field-padding-y: .5rem !default;
-$form-field-padding-x: .5rem !default;
+$form-field-padding-y: 0.5rem !default;
+$form-field-padding-x: 0.5rem !default;
 
 // Borders
-$border-color: $light-gray !default;
-$border-width: 1px !default;
+$border-color: black !default;
+$border-width: 3px !default;
 $border-radius: 3px !default;
 
 // Forms
 $form-field-font-size: 1rem;
 $form-field-height: 2.25rem;
-$form-field-padding-y: .5rem;
-$form-field-padding-x: .5rem;
+$form-field-padding-y: 0.5rem;
+$form-field-padding-x: 0.5rem;
 
 // Code
 $pre-border-radius: 0;
@@ -123,4 +124,4 @@ $footer-padding: $space-3;
 $footer-color: #7a7a7a;
 $footer-bg-color: #fafafa;
 $footer-font-weight: 300;
-$footer-font-size: .75rem;
+$footer-font-size: 0.75rem;

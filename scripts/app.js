@@ -54,7 +54,7 @@ var Module = (function() {
     const map = new google.maps.Map(document.getElementById("map"), {
       center: {
         lat: 15,
-        lng: 0
+        lng: 180
       },
       zoom: 2
     });

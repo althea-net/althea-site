@@ -8,7 +8,7 @@ Althea is an “incentivized mesh” system- nodes pay each other for bandwidth.
 
 ## Subnet registries
 
-Althea subnet registries define local Althea networks. They are lists of Althea nodes, identified by an an IP address and a blockchain address. They are meant to be maintained by local groups of Althea users. An Althea subnet registry is a decentralized organization with two types of participants:
+Althea subnet registries define local Althea networks. They are lists of Althea nodes, identified by an IP address and a blockchain address. They are meant to be maintained by local groups of Althea users. An Althea subnet registry is a decentralized organization with two types of participants:
 
 * Nodes, which are identified by an IP address and a blockchain address. Nodes on a given subnet registry connect only to other nodes on that subnet registry.
 * Organizers, who have the ability to vote on adding and removing nodes and other organizers.
@@ -127,7 +127,7 @@ Subnet organizers are excited about incentivized mesh and promote it in their ar
 
 ## End users
 
-End users are using the network, and while they may be excited about the concept of incentivized mesh, they mostly it to work. They are receiving access from one or more intermediary nodes that they are within line of sight of. They were probably sold on the concept of incentivized mesh by the subnet organizers of their subnet.
+End users are using the network, and while they may be excited about the concept of incentivized mesh, they mostly just want it to work. They are receiving access from one or more intermediary nodes that they are within line of sight of. They were probably sold on the concept of incentivized mesh by the subnet organizers of their subnet.
 
 ### Economic activity
 

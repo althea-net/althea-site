@@ -1,10 +1,8 @@
 ---
 layout: page
-title: How it works
+title: Althea governance system
 permalink: /governance-paper
 ---
-
-# Althea governance system
 
 Althea is an “incentivized mesh” system- nodes pay each other for bandwidth. This can be used to create a decentralized internet access network serving towns and cities. More in the [network white paper](https://altheamesh.com/documents/whitepaper.pdf). Node-to-node bandwidth payments are settled by payment channels in Ether or a number of other tokens which we will refer to as payment tokens. The governance system described here is controlled by Althea validators who stake a token called Althea governance token (ALGT). Both payments and governance are running on the Althea [Cosmos zone](https://cosmos.network/resources/whitepaper), a public blockchain, which is maintained by the Althea validators. Althea validators can also stake their ALGT to vote and perform other functions within the governance system.
 

@@ -127,7 +127,7 @@ Subnet organizers are excited about incentivized mesh and promote it in their ar
 
 ## End users
 
-End users are using the network, and while they may be excited about the concept of incentivized mesh, they mostly just want it to work. They are receiving access from one or more intermediary nodes that they are within line of sight of. They were probably sold on the concept of incentivized mesh by the subnet organizers of their subnet.
+End users are using the network, and while they may be excited about the concept of incentivized mesh, they mostly just want it to work. They are receiving access from one or more intermediary nodes that they are within line of sight of, or have another kind of connection with (Ethernet, coaxial cable, DSL, fiber, etc). They were probably sold on the concept of incentivized mesh by the subnet organizers of their subnet.
 
 ### Economic activity
 
@@ -138,13 +138,16 @@ End users are using the network, and while they may be excited about the concept
 
 * Are allocated an IP address by subnet registry organizers.
 
-## Intermediary/gateway node owners
+## Intermediary node owners
 
-Intermediary node owners own a node which connects end user nodes or other intermediary nodes to the network. They make the system work on a basic level and receive the payments for bandwidth which make up the bulk of economic activity in the system. The functioning of intermediary and end user nodes is what makes up most of the Althea [network white paper](). Gateway nodes are like intermediary nodes, but connect the network to the internet.
+Intermediary node owners own a node which connects end user nodes or other intermediary nodes to the network. They make the system work on a basic level and receive the payments for bandwidth which make up the bulk of economic activity in the system. The functioning of intermediary and end user nodes is what makes up most of the Althea [network white paper]().
 
 ### Economic activity
 
-* Receive and make bandwidth payments in the incentivized mesh system.
+* Sell bandwidth to other Althea nodes.
+* Either:
+  * Buy bandwidth from another Althea node.
+  * Pay for or otherwise procure bandwidth to the Internet in the conventional system.
 * Pay IP address renewal fee to subnet registry.
 
 ### Governance activity

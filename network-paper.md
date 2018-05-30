@@ -17,7 +17,7 @@ Althea’s goal is for any person to be able to install a piece of equipment, pa
 
 * Switching costs within the system are reduced, as nodes switch between connectivity providers to find a route with the best combination of reliability, bandwidth, and low cost.
 
-* Advertising and marketing costs for the connectivity providers are eliminated, as the only advertisements in this system are the automatic advertisements of price and route quality between nodes. This makes things easy for new entrants.
+* Advertising and marketing costs for people running nodes are eliminated, as the only advertisements in this system are the automatic advertisements of price and route quality between nodes. This makes things easy for new entrants.
 
 * Contract and billing costs are eliminated by payment channels. Payment channels allow one to make micropayments with very low overhead.
 
@@ -27,7 +27,7 @@ Althea allows routers to pay each other for bandwidth using cryptocurrency payme
 
 ## Network overview
 
-To simplify the explanation of Althea's network architecture we present several 'roles' that devices may perform. Note that these are logical roles, not physical ones. So a single device may perform several or even all of these roles simultaneously:
+To simplify the explanation of Althea's network architecture we present several roles that devices may perform. Note that these are logical roles, not physical ones. So a single device may perform several or even all of these roles simultaneously:
 
 * **User nodes** are installed by people who want to buy internet access on Althea. You can think of a user node as being similar to the router and/or modem that is installed by a traditional ISP. The difference is that it is independent of any one ISP. User nodes bridge traffic from non-Althea devices into the Althea network by providing Wifi hotspots and/or wired LAN ports.
 
@@ -86,25 +86,9 @@ From the Babel specification:
 
 All current distance vector protocols, including Babel, have a major weakness. All information about link cost and route metrics is provided on a completely trusted and unverified basis. There is nothing stopping any node from claiming that it has the best route to any destination. This is usually not a problem, since most networks today are owned by one entity. In Althea, nodes are owned by many people and entities, all competing to provide the best service. Leaving this vulnerability unaddressed would allow financially-motivated attacks, such as nodes claiming to have better routes than they actually do in an effort to get more business.
 
-Babel uses a sequence of "Hello" and "I heard you" (or "IHU") messages to estimate link quality between neighbors. Each node periodically broadcasts a Hello message to all of its neighbors. Each Hello has a sequence number. By looking at the sequence number of each Hello received and comparing it to the last one, neighbors can determine whether they have missed Hello messages from the node. Nodes keep an array of 16 bits for each neighbor corresponding to the last 16 Hello messages, with a 1 representing a received Hello and a 0 representing a missed Hello. From this array, a number called the "rxcost" (short for receive cost) is calculated.
+We propose a modification to the Babel protocol to allow for verification of routes. Our modification involves the addition of a "verifiable metric". We define a "verifiable metric" as a distance vector metric that remains the same when observed end-to-end or by individual nodes. For example round trip time (rtt) as a metric can be summed along the route or computed purely by the source and destination. Using a verifiable metric user nodes and exit nodes can get an independent sample of the connection metric over an encrypted tunnel between them. The tunnel keeps nodes from cheating by prioritizing route verification packets. This technique is known as [stealth probing](ftp://ftp.cs.princeton.edu/techreports/2005/730.pdf).
 
-This rxcost is then sent back to the neighbor in an IHU message. The neighbor then considers this number the "txcost" (short for transmit cost). From these two numbers the overall link cost is calculated using the [ETX metric](https://pdos.csail.mit.edu/papers/grid:mobicom03/paper.pdf).
-
-From the Babel specification:
-
-> A node uses a neighbour's Hello history to compute an estimate, written beta, of the probability that a `Hello TLV` is successfully received. The `rxcost` is defined as `256/beta`.
->
-> Let `alpha` be `MIN(1, 256/txcost)`, an estimate of the probability of successfully sending a `Hello TLV`.
->
-> The cost is then computed by
->
-> `cost = 256/(alpha * beta)`
->
-> or, equivalently,
->
-> `cost = (MAX(txcost, 256) * rxcost) / 256.`
-
-We propose a modification to the Babel protocol to allow for verification of routes. Our modification involves the addition of a 'verifiable metric'. We define a 'verifiable metric' as a distance vector metric that remains the same when observed end-to-end or by individual nodes. For example round trip time (rtt) as a metric can be summed along the route or computed purely by the source and destination . Using a verifiable metric user nodes and exit nodes can get an independent sample of the connection metric over an encrypted tunnel between them. The metric calculated is expected to be close to the overall metric advertised for the destination by the neighbor currently forwarding packets to the destination. This gives us a way to verify the accuracy of advertised routes. If the metric does not match the metric advertised by the selected neighbor, the neighbor’s [accuracy score](#acccuracy-score) is affected, and the metric through this neighbor is [adjusted](#route-metric-adjustment).
+The metric calculated is expected to be close to the overall metric advertised for the destination by the neighbor currently forwarding packets to the destination. This gives us a way to verify the accuracy of advertised routes. If the metric does not match the metric advertised by the selected neighbor, the neighbor’s [accuracy score](#acccuracy-score) is affected, and the metric through this neighbor is [adjusted](#route-metric-adjustment).
 
 ## Verification scheduling
 

@@ -8,7 +8,7 @@ permalink: /governance-paper
 
 * **v0.5** May 2018
 
-Althea is an “incentivized mesh” system- nodes pay each other for bandwidth. This can be used to create a decentralized internet access network serving towns and cities. More in the [network white paper](https://altheamesh.com/documents/whitepaper.pdf). Node-to-node bandwidth payments are settled by payment channels in Ether or a number of other tokens which we will refer to as payment tokens. The governance system described here is controlled by Althea validators who stake a token called Althea governance token (ALGT). Both payments and governance are running on the Althea [Cosmos zone](https://cosmos.network/resources/whitepaper), a public blockchain, which is maintained by the Althea validators. Althea validators can also stake their ALGT to vote and perform other functions within the governance system.
+Althea is an “incentivized mesh” system- nodes pay each other for bandwidth. This can be used to create a decentralized internet access network serving towns and cities. More in the [network paper](https://altheamesh.com/network-paper). Node-to-node bandwidth payments are settled by payment channels in Ether or a number of other tokens which we will refer to as payment tokens. The governance system described here is controlled by Althea validators who stake a token called Althea governance token (ALGT). Both payments and governance are running on the Althea [Cosmos zone](https://cosmos.network/resources/whitepaper), a public blockchain, which is maintained by the Althea validators. Althea validators can also stake their ALGT to vote and perform other functions within the governance system.
 
 ## Subnet registries
 
@@ -33,7 +33,7 @@ Subnet registries themselves are curated by the Althea global TCR, a [Token Cura
 The global TCR can be considered a sort of certification of subnet registries. This information can be used in different ways:
 
 * Nodes with standard Althea firmware will not be able to join to subnet registries which are not on the global TCR.
-* People wanting to try Althea can learn about subnet registries in their are from the global TCR (for example, a coverage map on a website could provide this information).
+* People wanting to try Althea can learn about subnet registries in their area from the global TCR (for example, a coverage map on a website could provide this information).
 
 ## TCR Voting process
 

@@ -109,7 +109,7 @@ A percentage of this fee is also sent to any address which has staked ALGT, whet
 * Get a list of all nodes which are currently on the subnet DAO.
 * For each of these accounts:
   * Figure out how much it owes the subnet DAO, based on the renewal fee, the last block it paid the registry, the block it joined the registry, or the block it left the registry.
-  * Calculate how much of the renewal fee goes to the global TCR and transfer it.
+  * Calculate how much of the renewal fee goes to the Althea validators and curators and transfer it.
   * Transfer the remaining amount from the node’s escrow to the subnet DAO.
 
 ### When a node leaves a subnet:

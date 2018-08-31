@@ -139,7 +139,7 @@ table ip althea {
 ```
 
 ## Traffic Shaping
-Now it is time to prioritize traffic depending on how much nodes are paying. I'm using [tc](http://www.lartc.org/manpages/tc.txt), which is a tool in linux for this purpose. Traffic shaping is a very subtle process and I don't fully understand all the ins and outs yet. Also, tc's syntax is frankly quite cumbersome. Tc lets you set up qdiscs- (short for queueing discipline). There are also filters which can put packets into different classes inside the qdisc depending on different criteria. The qdisc then enqueues packets into the different classes, and either dequeues them to the network or drops them to accomplish its traffic shaping goals.
+Now it is time to prioritize traffic depending on how much nodes are paying. I'm using [tc](https://linux.die.net/man/8/tc), which is a tool in linux for this purpose. Traffic shaping is a very subtle process and I don't fully understand all the ins and outs yet. Also, tc's syntax is frankly quite cumbersome. Tc lets you set up qdiscs- (short for queueing discipline). There are also filters which can put packets into different classes inside the qdisc depending on different criteria. The qdisc then enqueues packets into the different classes, and either dequeues them to the network or drops them to accomplish its traffic shaping goals.
 
 I'll start with a diagram to explain the shaping setup that I have made, because the tc scripts are hard to follow.
 
